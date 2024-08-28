@@ -1,9 +1,10 @@
 import React from "react";
+import MainHeader from "../../components/layouts/MainHeader";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <header>main page header</header>
+      <MainHeader />
       {children}
     </>
   );
