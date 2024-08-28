@@ -1,6 +1,6 @@
 import React from "react";
 import SearchIcon from "../icons/SearchIcon";
-import ShoppingBagIcon from "../icons/ShoppingBagIcon";
+import CartIconWithCount from "./CartIconWithCount";
 import Image from "next/image";
 import Logo from "../icons/Logo";
 import Link from "next/link";
@@ -17,7 +17,7 @@ const MainHeader = () => {
           <SearchIcon />
         </div>
         <div>
-          <ShoppingBagIcon />
+          <CartIconWithCount />
         </div>
       </div>
       {/* </div> */}
