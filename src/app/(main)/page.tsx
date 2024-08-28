@@ -1,7 +1,12 @@
 import React from "react";
+import MainNav from "../../components/layouts/MainNav";
 
 const Home = () => {
-  return <main>This is main page.</main>;
+  return (
+    <>
+      <MainNav />
+    </>
+  );
 };
 
 export default Home;
