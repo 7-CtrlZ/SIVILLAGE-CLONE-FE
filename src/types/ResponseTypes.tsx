@@ -36,7 +36,13 @@ export interface reviewDataType {
 export interface commonResType {
   status: string;
   message: string;
-  data: any;
+  data: UserData;
+}
+
+export interface UserData {
+  id: string;
+  accessToken: string;
+  name: string;
 }
 
 export interface topCategoryType {

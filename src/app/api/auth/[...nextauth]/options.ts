@@ -1,6 +1,7 @@
 import { commonResType } from "../../../../types/ResponseTypes";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { UserData } from "../../../../types/ResponseTypes";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -37,21 +38,39 @@ export const options: NextAuthOptions = {
 
         if (res.ok) {
           const user: commonResType = (await res.json()) as commonResType;
-          console.log("user", user.data);
-          return user.data;
+          console.log("로그인 시도한 user의 응답 data", user.data);
+          return user.data; // 로그인 성공 시 사용자 정보 반환
         }
-        return null;
+        return null; // 로그인 실패 시 null 반환
       },
     }),
   ],
   callbacks: {
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   console.log("signIn", user, account, profile);
+    //   return true;
+    // },
+
     async signIn({ user, account, profile, email, credentials }) {
       console.log("signIn", user, account, profile);
-      return true;
+
+      if (user) {
+        // 로그인 성공 시 true 반환
+        return true;
+      } else {
+        // 로그인 실패 시 false 반환
+        console.log("로그인 실패!!");
+        return false;
+      }
     },
 
     async jwt({ token, user }) {
-      return { ...token, ...user };
+      if (user) {
+        const userData = user as UserData;
+        token.accessToken = userData.accessToken;
+        token.name = userData.name;
+      }
+      return token;
     },
 
     async session({ session, token }) {
