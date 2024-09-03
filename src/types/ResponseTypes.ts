@@ -1,18 +1,18 @@
-export interface reviewResponseDataType {
+export interface ReviewResponseDataType {
   HttpStatus: string;
   code: number;
   message: string;
-  data: reviewListDataType;
+  data: ReviewListDataType;
 }
 
-export interface reviewListDataType {
+export interface ReviewListDataType {
   totalCnt: number;
   page: number;
   isLastPage: boolean;
-  reviewData: reviewDataType[];
+  reviewData: ReviewDataType[];
 }
 
-export interface reviewDataType {
+export interface ReviewDataType {
   reviewId: number;
   rating: number;
   reviewLikeCount: number;
@@ -33,7 +33,7 @@ export interface reviewDataType {
   }[];
 }
 
-export interface commonResType {
+export interface CommonResType {
   status: string;
   message: string;
   data: UserData;
@@ -45,20 +45,20 @@ export interface UserData {
   name: string;
 }
 
-export interface topCategoryType {
+export interface TopCategoryType {
   topCategoryCode: string;
   topCategoryName: string;
   topCategoryDescription: string;
 }
 
-export interface middleCategoryType {
+export interface MiddleCategoryType {
   middleCategoryCode: string;
   middleCategoryName: string;
   middleCategoryDescription: string;
   topCategoryCode: string;
 }
 
-export interface bottomCategoryType {
+export interface BottomCategoryType {
   bottomCategoryCode: string;
   bottomCategoryName: string;
   bottomCategoryDescription: string;
