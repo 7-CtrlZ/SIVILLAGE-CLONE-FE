@@ -1,4 +1,4 @@
-import { commonResType } from "../../../../types/ResponseTypes";
+import { CommonResType } from "../../../../types/ResponseTypes";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { UserData } from "../../../../types/ResponseTypes";
@@ -37,7 +37,7 @@ export const options: NextAuthOptions = {
         });
 
         if (res.ok) {
-          const user: commonResType = (await res.json()) as commonResType;
+          const user: CommonResType = (await res.json()) as CommonResType;
           console.log("로그인 시도한 user의 응답 data", user.data);
           return user.data; // 로그인 성공 시 사용자 정보 반환
         }
