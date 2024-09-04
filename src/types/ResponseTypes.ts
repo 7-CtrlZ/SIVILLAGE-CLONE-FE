@@ -48,19 +48,22 @@ export interface UserData {
 export interface TopCategoryType {
   topCategoryCode: string;
   topCategoryName: string;
-  topCategoryDescription: string;
 }
 
 export interface MiddleCategoryType {
+  topCategoryCode: string;
   middleCategoryCode: string;
   middleCategoryName: string;
-  middleCategoryDescription: string;
-  topCategoryCode: string;
 }
 
 export interface BottomCategoryType {
+  middleCategoryCode: string;
   bottomCategoryCode: string;
   bottomCategoryName: string;
-  bottomCategoryDescription: string;
-  middleCategoryCode: string;
+}
+
+export interface SubCategoryType {
+  bottomCategoryCode: string;
+  subCategoryCode: string;
+  subCategoryName: string;
 }
