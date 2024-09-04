@@ -37,7 +37,8 @@ export const options: NextAuthOptions = {
         });
 
         if (res.ok) {
-          const user: CommonResType = (await res.json()) as CommonResType;
+          const user: CommonResType<UserData> =
+            (await res.json()) as CommonResType<UserData>;
           console.log("로그인 시도한 user의 응답 data", user.data);
           return user.data; // 로그인 성공 시 사용자 정보 반환
         }

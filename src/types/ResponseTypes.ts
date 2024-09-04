@@ -33,10 +33,11 @@ export interface ReviewDataType {
   }[];
 }
 
-export interface CommonResType {
+// 제네릭을 사용하는 CommonResType 정의
+export interface CommonResType<T> {
   status: string;
   message: string;
-  data: UserData;
+  data: T;
 }
 
 export interface UserData {
