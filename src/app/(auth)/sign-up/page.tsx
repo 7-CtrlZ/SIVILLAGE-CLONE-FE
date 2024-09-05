@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 };
 
 const page = async () => {
-  const handleSignUp = async (signUpFormData: FormData) => {
-    "use server";
-    const res = await signUpAction(signUpFormData);
-    // console.log(res);
-  };
+  // const handleSignUp = async (signUpFormData: FormData) => {
+  //   "use server";
+  //   const res = await signUpAction(signUpFormData);
+  //   // console.log(res);
+  // };
   return (
     <main>
-      <SignUpForm handleSignUp={handleSignUp} />
+      <SignUpForm />
     </main>
   );
 };
