@@ -9,7 +9,7 @@ export async function getTopCategories(): Promise<TopCategoryType[]> {
   if (!res.ok) {
     throw new Error("Failed to fetch top-categoryList");
   }
-
+  console.log("이게 바로 카테고리", res);
   // const data = (await res.json()) as CommonResType<TopCategoryType[]>;
   const data: CommonResType<TopCategoryType[]> = {
     data: dummyTopCategoryListData,
