@@ -1,13 +1,28 @@
 import React from "react";
 import { getTopCategories } from "@/actions/initial/categoryActions";
+import TopCategoryList from "@/components/pages/TopCategoryList";
+import MiddleCategoryList from "@/components/pages/MiddleCategoryList";
+import { TopCategoryType } from "@/types/ResponseTypes";
 
-const page = ({ params }: { params: { category: string[] } }) => {
-  console.log(params);
+const page = async ({
+  params,
+}: {
+  params: { topCategoryName: string; topCategoryCode: string };
+}) => {
+  const topCategoryData: TopCategoryType[] = await getTopCategories();
+
   return (
-    <div>
-      {params.category}
-      This is categories tab page~
-    </div>
+    <main className="w-full">
+      <div className="grid grid-cols-12">
+        <div className="col-span-3 bg-slate-400">
+          <TopCategoryList
+            data={topCategoryData}
+            categoryCode={params.topCategoryCode}
+          />
+        </div>
+        <MiddleCategoryList categoryCode={params.topCategoryCode} />
+      </div>
+    </main>
   );
 };
 
@@ -15,7 +30,10 @@ export async function generateStaticParams() {
   const categories = await getTopCategories();
   const paths = categories.map((category) => {
     return {
-      params: { category: [category.topCategoryName] },
+      params: {
+        topCategoryName: category.topCategoryName,
+        topCategoryCode: category.topCategoryCode,
+      },
     };
   });
   return paths;
