@@ -15,7 +15,7 @@ export async function signUpAction(signUpFormData: FormData) {
   };
   // console.log("action payload", payload);
 
-  const res = await fetch(`${process.env.API_BASE_URL}/api/v1/auth/sign-up`, {
+  const res = await fetch(`${process.env.SERVER_URL}/api/v1/auth/sign-up`, {
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -23,7 +23,7 @@ export async function signUpAction(signUpFormData: FormData) {
     },
   });
 
-  console.log(res);
+  console.log("회원 가입 시도 후 response", res);
   // 중복되지 않은 경우 가입 요청
   if (res.ok) {
     return await res.json();

@@ -25,16 +25,19 @@ export const options: NextAuthOptions = {
         }
 
         // console.log("credentials", credentials);
-        const res = await fetch(`${process.env.API_BASE_URL}/user/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: credentials.email,
-            password: credentials.password,
-          }),
-        });
+        const res = await fetch(
+          `${process.env.SERVER_URL}/api/v1/auth/sign-in`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          }
+        );
 
         if (res.ok) {
           const user: CommonResType<UserData> =
@@ -53,7 +56,7 @@ export const options: NextAuthOptions = {
     // },
 
     async signIn({ user, account, profile, email, credentials }) {
-      console.log("signIn", user, account, profile);
+      console.log("콜백에서 signIn 함수", user, account, profile);
 
       if (user) {
         // 로그인 성공 시 true 반환

@@ -9,7 +9,7 @@ function TopCategoryList({
   data: TopCategoryType[];
   categoryCode: string;
 }) {
-  console.log(categoryCode);
+  console.log("카테고리 코드: ", categoryCode);
   return (
     <nav className="h-screen">
       <ul>

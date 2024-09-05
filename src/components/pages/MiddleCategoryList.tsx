@@ -4,7 +4,7 @@ import React from "react";
 
 async function MiddleCategoryList({ categoryCode }: { categoryCode: string }) {
   const middleCategoryData = await getMiddleCategories(categoryCode);
-  console.log(middleCategoryData);
+  console.log("미들 카테고리 데이터: ", middleCategoryData);
   return (
     <div className="col-span-9">
       <nav>
