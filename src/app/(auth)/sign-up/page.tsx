@@ -11,7 +11,7 @@ const page = async () => {
   const handleSignUp = async (signUpFormData: FormData) => {
     "use server";
     const res = await signUpAction(signUpFormData);
-    console.log(res);
+    // console.log(res);
   };
   return (
     <main>
