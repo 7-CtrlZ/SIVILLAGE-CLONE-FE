@@ -4,24 +4,41 @@ import { MiddleCategoryType } from "@/types/ResponseTypes";
 
 export async function getTopCategories(): Promise<TopCategoryType[]> {
   "use server";
-  const res = await fetch(
-    `${process.env.SERVER_URL}/api/v1/admin/category/top-categoryList`
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch top-categoryList");
+  try {
+    const res = await fetch(
+      `${process.env.SERVER_URL}/api/v1/admin/category/top-categoryList`,
+      {
+        cache: "no-cache",
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch top-categoryList: ${res.status}`);
+    }
+
+    // 응답을 JSON으로 파싱
+    const data = (await res.json()) as CommonResType<TopCategoryType[]>;
+
+    // 파싱된 데이터를 출력
+    console.log("탑 카테고리 데이터 response: ", data);
+
+    return data.data as TopCategoryType[]; // data에 들어 있는 categories 배열 반환
+  } catch (error) {
+    console.error("Error fetching top categories:", error);
+    throw error;
   }
-  console.log("이게 최상위 카테고리", res);
-  const data = (await res.json()) as CommonResType<TopCategoryType[]>;
-  return data.data as TopCategoryType[];
 }
 
 export async function getMiddleCategories(
-  categoryName: string
+  categoryCode: string
 ): Promise<MiddleCategoryType[]> {
   "use server";
 
   const res = await fetch(
-    `${process.env.SERVER_URL}/api/v1/admin/category/middle-categoryList/${categoryName}`
+    `${process.env.SERVER_URL}/api/v1/admin/category/middle-categoryList/${categoryCode}`,
+    {
+      cache: "no-cache",
+    }
     // { next: { revalidate: 10 } }
   );
   if (!res.ok) {

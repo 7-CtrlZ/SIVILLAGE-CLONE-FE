@@ -1,15 +1,13 @@
 import { getMiddleCategories } from "@/actions/initial/categoryActions";
 import { MiddleCategoryType } from "@/types/ResponseTypes";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-async function MiddleCategoryList({ categoryCode }: { categoryCode: string }) {
-  const middleCategoryData = await getMiddleCategories(categoryCode);
-  console.log("미들 카테고리 데이터: ", middleCategoryData);
+async function MiddleCategoryList({ data }: { data: MiddleCategoryType[] }) {
   return (
     <div className="col-span-9">
       <nav>
         <ul>
-          {middleCategoryData.map((category: MiddleCategoryType) => (
+          {data.map((category: MiddleCategoryType) => (
             <li key={category.middleCategoryCode}>
               {category.middleCategoryName}
             </li>

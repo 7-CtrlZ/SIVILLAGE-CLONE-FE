@@ -6,7 +6,7 @@ import { SignUpErrorType } from "@/types/ErrorTypes";
 import { useRouter } from "next/router";
 
 export default function SignUpForm() {
-  const router = useRouter();
+  // const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -84,7 +84,7 @@ export default function SignUpForm() {
         console.log("Server response data:", data);
 
         // 성공적으로 회원가입이 되었을 때 홈으로 리다이렉트
-        router.push("/");
+        // router.push("/");
       } else {
         const errorData = await res.json();
         console.log("Error response data:", errorData);

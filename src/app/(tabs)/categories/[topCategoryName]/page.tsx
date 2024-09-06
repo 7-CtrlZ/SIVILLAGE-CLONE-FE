@@ -1,8 +1,12 @@
 import React from "react";
-import { getTopCategories } from "@/actions/initial/categoryActions";
+import {
+  getTopCategories,
+  getMiddleCategories,
+} from "@/actions/initial/categoryActions";
 import TopCategoryList from "@/components/pages/TopCategoryList";
 import MiddleCategoryList from "@/components/pages/MiddleCategoryList";
 import { TopCategoryType } from "@/types/ResponseTypes";
+import { MiddleCategoryType } from "@/types/ResponseTypes";
 
 const page = async ({
   params,
@@ -10,6 +14,9 @@ const page = async ({
   params: { topCategoryName: string; topCategoryCode: string };
 }) => {
   const topCategoryData: TopCategoryType[] = await getTopCategories();
+  const middleCategoryData: MiddleCategoryType[] = await getMiddleCategories(
+    params.topCategoryCode
+  );
 
   return (
     <main className="w-full">
@@ -20,7 +27,7 @@ const page = async ({
             categoryCode={params.topCategoryCode}
           />
         </div>
-        <MiddleCategoryList categoryCode={params.topCategoryCode} />
+        <MiddleCategoryList data={middleCategoryData} />
       </div>
     </main>
   );
