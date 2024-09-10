@@ -1,6 +1,6 @@
-import { getMiddleCategories } from "@/actions/initial/categoryActions";
 import { MiddleCategoryType } from "@/types/ResponseTypes";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import Link from "next/link";
 
 async function MiddleCategoryList({ data }: { data: MiddleCategoryType[] }) {
   return (
@@ -8,9 +8,11 @@ async function MiddleCategoryList({ data }: { data: MiddleCategoryType[] }) {
       <nav>
         <ul>
           {data.map((category: MiddleCategoryType) => (
-            <li key={category.middleCategoryCode}>
-              {category.middleCategoryName}
-            </li>
+            <Link href={`/productlist/${category.middleCategoryCode}`}>
+              <li key={category.middleCategoryCode}>
+                {category.middleCategoryName}
+              </li>
+            </Link>
           ))}
         </ul>
       </nav>
