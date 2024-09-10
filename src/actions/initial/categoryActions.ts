@@ -20,7 +20,7 @@ export async function getTopCategories(): Promise<TopCategoryType[]> {
     const data = (await res.json()) as CommonResType<TopCategoryType[]>;
 
     // 파싱된 데이터를 출력
-    console.log("탑 카테고리 데이터 response: ", data);
+    // console.log("탑 카테고리 데이터 response: ", data);
 
     return data.data as TopCategoryType[]; // data에 들어 있는 categories 배열 반환
   } catch (error) {
@@ -41,11 +41,15 @@ export async function getMiddleCategories(
     }
     // { next: { revalidate: 10 } }
   );
+  console.log(
+    "미들 카테고리 요청에 들어간 탑 카테고리 코드 params",
+    categoryCode
+  );
   if (!res.ok) {
     throw new Error("Failed to fetch");
   }
 
-  console.log("이게 미들 카테고리", res);
   const data = (await res.json()) as CommonResType<MiddleCategoryType[]>;
+  console.log("미들 카테고리", data);
   return data.data as MiddleCategoryType[];
 }

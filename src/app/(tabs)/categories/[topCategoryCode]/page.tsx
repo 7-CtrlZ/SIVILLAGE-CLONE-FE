@@ -18,13 +18,18 @@ const page = async ({
     params.topCategoryCode
   );
 
+  // console.log(
+  //   "부모가 데이터를 잘 전달해주는 지 확인: ",
+  //   params.topCategoryCode
+  // );
+
   return (
     <main className="w-full">
       <div className="grid grid-cols-12">
         <div className="col-span-3 bg-slate-400">
           <TopCategoryList
             data={topCategoryData}
-            categoryCode={params.topCategoryCode}
+            categoryCode={decodeURIComponent(params.topCategoryCode)}
           />
         </div>
         <MiddleCategoryList data={middleCategoryData} />
@@ -34,16 +39,12 @@ const page = async ({
 };
 
 export async function generateStaticParams() {
-  const categories = await getTopCategories();
-  const paths = categories.map((category) => {
-    return {
-      params: {
-        topCategoryName: category.topCategoryName,
-        topCategoryCode: category.topCategoryCode,
-      },
-    };
-  });
-  return paths;
+  const categories: TopCategoryType[] = await getTopCategories();
+  // console.log("카테고리 데이터: ", categories);
+  return categories.map((category) => ({
+    topCategoryCode: category.topCategoryCode,
+    topCategoryName: category.topCategoryName,
+  }));
 }
 
 export default page;

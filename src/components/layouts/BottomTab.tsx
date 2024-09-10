@@ -51,7 +51,7 @@ function BottomTab({ topCategories }: { topCategories: TopCategoryType[] }) {
     if (topCategories.length > 0) {
       const lastSelectedCategory =
         localStorage.getItem("lastSelectedCategory") ||
-        topCategories[0].topCategoryName;
+        topCategories[0].topCategoryCode;
 
       const updatedTabNav = tabNav.map((tab) =>
         tab.title === "카테고리"
