@@ -15,7 +15,7 @@ function TopCategoryList({
       <ul>
         {data.map((category: TopCategoryType) => (
           <Link
-            href={`/categories/${category.topCategoryCode}`}
+            href={`/categories?topCategoryCode=${category.topCategoryCode}`}
             key={category.topCategoryCode}
           >
             <li

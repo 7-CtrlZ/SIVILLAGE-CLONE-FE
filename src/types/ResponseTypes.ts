@@ -68,3 +68,7 @@ export interface SubCategoryType {
   subCategoryCode: string;
   subCategoryName: string;
 }
+
+export interface ProductListType {
+  productCode: number;
+}
