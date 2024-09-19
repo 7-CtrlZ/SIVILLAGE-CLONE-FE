@@ -8,37 +8,38 @@ const page = async ({
   searchParams,
 }: {
   searchParams: {
-    topCategoryCode?: string | null;
-    middleCategoryCode?: string | null;
-    bottomCategoryCode?: string | null;
-    subCategoryCode?: string | null;
+    topCategoryName?: string | null;
+    middleCategoryName?: string | null;
+    bottomCategoryName?: string | null;
+    subCategoryName?: string | null;
   };
 }) => {
-  let categoryCode: string | null = null;
+  let categoryName: string | null = null;
   let categoryLevel: CategoryLevel | null = null;
 
-  if (searchParams.subCategoryCode) {
-    categoryCode = searchParams.subCategoryCode;
+  if (searchParams.subCategoryName) {
+    categoryName = searchParams.subCategoryName;
     categoryLevel = "sub";
-  } else if (searchParams.bottomCategoryCode) {
-    categoryCode = searchParams.bottomCategoryCode;
+  } else if (searchParams.bottomCategoryName) {
+    categoryName = searchParams.bottomCategoryName;
     categoryLevel = "bottom";
-  } else if (searchParams.middleCategoryCode) {
-    categoryCode = searchParams.middleCategoryCode;
+  } else if (searchParams.middleCategoryName) {
+    categoryName = searchParams.middleCategoryName;
     categoryLevel = "middle";
-  } else if (searchParams.topCategoryCode) {
-    categoryCode = searchParams.topCategoryCode;
+  } else if (searchParams.topCategoryName) {
+    categoryName = searchParams.topCategoryName;
     categoryLevel = "top";
   }
 
-  const products = categoryCode
-    ? await getCategoryProducts(categoryCode, categoryLevel!)
-    : [];
+  const products =
+    categoryName && categoryLevel
+      ? await getCategoryProducts(categoryName, categoryLevel)
+      : [];
 
   return (
     <main className="w-full">
       <div className="container">
-        <h1>카테고리 코드: {categoryCode}</h1>
+        <h1>카테고리 이름: {categoryName}</h1>
         <h2>카테고리 레벨: {categoryLevel}</h2>
         <ul>
           {products.map((product) => (

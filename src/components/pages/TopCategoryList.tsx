@@ -4,10 +4,10 @@ import React from "react";
 
 function TopCategoryList({
   data,
-  categoryCode,
+  categoryName,
 }: {
   data: TopCategoryType[];
-  categoryCode: string;
+  categoryName: string;
 }) {
   // console.log("카테고리 데이터: ", data);
   return (
@@ -15,12 +15,12 @@ function TopCategoryList({
       <ul>
         {data.map((category: TopCategoryType) => (
           <Link
-            href={`/categories?topCategoryCode=${category.topCategoryCode}`}
-            key={category.topCategoryCode}
+            href={`/categories?topCategoryName=${category.topCategoryName}`}
+            key={category.topCategoryName}
           >
             <li
               className={`${
-                categoryCode === category.topCategoryCode
+                categoryName === category.topCategoryName
                   ? "bg-black text-white transition-all"
                   : "bg-white transition-all"
               } text-left py-2 px-4 text-sm`}

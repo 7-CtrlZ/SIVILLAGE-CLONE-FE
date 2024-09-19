@@ -5,10 +5,10 @@ import { getMiddleCategories } from "@/actions/initial/categoryActions";
 import { ChevronRight } from "lucide-react";
 
 async function MiddleCategoryList({
-  categoryCode,
+  categoryName,
   data,
 }: {
-  categoryCode: string;
+  categoryName: string;
   data: MiddleCategoryType[];
 }) {
   // const data = await getMiddleCategories(categoryCode);
@@ -20,8 +20,8 @@ async function MiddleCategoryList({
           {data.map((category: MiddleCategoryType) => (
             <Link
               className="text-sm flex justify-between items-center"
-              key={category.middleCategoryCode}
-              href={`/filter?topCategoryCode=${categoryCode}&middleCategoryCode=${category.middleCategoryName}`}
+              key={category.middleCategoryName}
+              href={`/productlist?topCategoryName=${categoryName}&middleCategoryName=${category.middleCategoryName}`}
             >
               <li className="py-3">{category.middleCategoryName}</li>
               <ChevronRight size={16} strokeWidth={1.5} />

@@ -25,20 +25,20 @@ export async function getTopCategories(): Promise<TopCategoryType[]> {
 }
 
 export async function getMiddleCategories(
-  categoryCode: string
+  categoryName: string
 ): Promise<MiddleCategoryType[]> {
   "use server";
   try {
     const res = await fetch(
-      `${process.env.SERVER_URL}/api/v1/admin/category/middle-categoryList/${categoryCode}`,
+      `${process.env.SERVER_URL}/api/v1/admin/category/topCategoryName/${categoryName}/middle-categoryList`,
       {
         cache: "no-cache",
       }
       // { next: { revalidate: 10 } }
     );
     console.log(
-      "미들 카테고리 요청에 들어간 탑 카테고리 코드 params",
-      categoryCode
+      "미들 카테고리 요청에 들어간 탑 카테고리 이름 파라미터",
+      categoryName
     );
     // if (!res.ok) {
     //   throw new Error("Failed to fetch");
@@ -54,22 +54,22 @@ export async function getMiddleCategories(
 }
 
 export async function getCategoryProducts(
-  categoryCode: string,
+  categoryName: string,
   categoryLevel: "top" | "middle" | "bottom" | "sub"
 ): Promise<ProductListType[]> {
   let queryParam = "";
   switch (categoryLevel) {
     case "top":
-      queryParam = `topCategoryCode=${categoryCode}`;
+      queryParam = `topCategoryName=${categoryName}`;
       break;
     case "middle":
-      queryParam = `middleCategoryCode=${categoryCode}`;
+      queryParam = `middleCategoryName=${categoryName}`;
       break;
     case "bottom":
-      queryParam = `bottomCategoryCode=${categoryCode}`;
+      queryParam = `bottomCategoryName=${categoryName}`;
       break;
     case "sub":
-      queryParam = `subCategoryCode=${categoryCode}`;
+      queryParam = `subCategoryName=${categoryName}`;
       break;
     default:
       throw new Error("이런 카테고리 depth 없음!");
