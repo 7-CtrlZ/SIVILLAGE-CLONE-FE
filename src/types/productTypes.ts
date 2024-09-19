@@ -43,6 +43,13 @@ export interface ProductCategory {
 }
 
 export interface ProductList {
-  products: Product[];
-  categories: ProductCategory[];
+  productCode: string;
+}
+
+export type CategoryLevel = "top" | "middle" | "bottom" | "sub";
+
+export interface ClientComponentProps {
+  products: ProductList[];
+  categoryCode: string;
+  categoryLevel: CategoryLevel;
 }

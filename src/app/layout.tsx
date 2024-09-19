@@ -17,13 +17,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const topCategories = await getTopCategories(); // API로 탑 카테고리 목록 불러오기
   return (
     <html lang="ko">
       <body className={inter.className}>
         <Authprovider>
           {children}
-          <BottomTab topCategories={topCategories} />
+          <BottomTab />
         </Authprovider>
       </body>
     </html>

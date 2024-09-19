@@ -71,6 +71,7 @@ export const options: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         const userData = user as UserData;
+        token.id = userData.id;
         token.accessToken = userData.accessToken;
         token.name = userData.name;
       }
@@ -78,7 +79,8 @@ export const options: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      session.user = token as any;
+      const { accessToken, ...userWithoutToken } = token as any;
+      session.user = userWithoutToken;
       return session;
     },
   },

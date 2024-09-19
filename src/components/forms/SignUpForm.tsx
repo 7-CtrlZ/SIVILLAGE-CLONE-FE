@@ -70,9 +70,9 @@ export default function SignUpForm() {
 
     try {
       // API 요청을 통해 서버와 통신
-      const res = await fetch("/api/auth/sign-up", {
+      const res = await fetch(`${process.env.SERVER_URL}/api/v1/auth/sign-up`, {
         method: "POST",
-        body: JSON.stringify(Object.fromEntries(submitFormData.entries())),
+        body: submitFormData,
         headers: {
           "Content-Type": "application/json",
         },

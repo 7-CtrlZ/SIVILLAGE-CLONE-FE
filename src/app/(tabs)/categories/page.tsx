@@ -9,19 +9,24 @@ import { TopCategoryType } from "@/types/ResponseTypes";
 import { MiddleCategoryType } from "@/types/ResponseTypes";
 
 const page = async ({
-  params,
+  searchParams,
 }: {
-  params: { topCategoryName: string; topCategoryCode: string };
+  searchParams: { [key: string]: string };
 }) => {
   const topCategoryData: TopCategoryType[] = await getTopCategories();
-  const middleCategoryData: MiddleCategoryType[] = await getMiddleCategories(
-    params.topCategoryCode
-  );
 
-  // console.log(
-  //   "부모가 데이터를 잘 전달해주는 지 확인: ",
-  //   params.topCategoryCode
-  // );
+  if (!searchParams.topCategoryCode && topCategoryData.length > 0) {
+    searchParams.topCategoryCode = topCategoryData[0].topCategoryCode;
+  } else if (topCategoryData.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(topCategoryData);
+  console.log(searchParams.topCategoryCode);
+
+  const middleCategories = await getMiddleCategories(
+    searchParams.topCategoryCode
+  );
 
   return (
     <main className="w-full">
@@ -29,10 +34,13 @@ const page = async ({
         <div className="col-span-3 bg-slate-400">
           <TopCategoryList
             data={topCategoryData}
-            categoryCode={decodeURIComponent(params.topCategoryCode)}
+            categoryCode={decodeURIComponent(searchParams.topCategoryCode)}
           />
         </div>
-        <MiddleCategoryList data={middleCategoryData} />
+        <MiddleCategoryList
+          categoryCode={decodeURIComponent(searchParams.topCategoryCode)}
+          data={middleCategories}
+        />
       </div>
     </main>
   );

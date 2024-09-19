@@ -44,27 +44,8 @@ export const defaultTabNav: TabNavType[] = [
   },
 ];
 
-function BottomTab({ topCategories }: { topCategories: TopCategoryType[] }) {
+function BottomTab() {
   const [tabNav, setTabNav] = useState<TabNavType[]>(defaultTabNav);
-
-  useEffect(() => {
-    if (topCategories.length > 0) {
-      const lastSelectedCategory =
-        localStorage.getItem("lastSelectedCategory") ||
-        topCategories[0].topCategoryCode;
-
-      const updatedTabNav = tabNav.map((tab) =>
-        tab.title === "카테고리"
-          ? { ...tab, url: `/categories/${lastSelectedCategory}` }
-          : tab
-      );
-      setTabNav(updatedTabNav);
-    }
-  }, [topCategories]);
-
-  if (topCategories.length === 0) {
-    return <LoadingComponent />; // 카테고리 목록이 없으면 로딩 컴포넌트 렌더링
-  }
 
   return (
     <div className="fixed bottom-0 w-full bg-white border-t border-gray-200">
