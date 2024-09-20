@@ -35,6 +35,7 @@ const page = async ({
     categoryName && categoryLevel
       ? await getCategoryProducts(categoryName, categoryLevel)
       : [];
+  console.log("product 목록: ", products);
 
   return (
     <main className="w-full">

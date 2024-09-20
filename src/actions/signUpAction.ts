@@ -7,8 +7,8 @@ export async function signUpAction(signUpFormData: FormData) {
     email: signUpFormData.get("email") as string,
     password: signUpFormData.get("password") as string,
     name: signUpFormData.get("name") as string,
-    phone: signUpFormData.get("phoneNumber") as string,
-    role: "멤버" as string,
+    phone: signUpFormData.get("phone") as string,
+    role: signUpFormData.get("role") as string,
   };
   console.log("회원가입 페이지에서 입력받아 담긴 payload: ", payload);
 

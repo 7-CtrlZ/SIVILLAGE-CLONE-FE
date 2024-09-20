@@ -7,6 +7,7 @@ import TopCategoryList from "@/components/pages/TopCategoryList";
 import MiddleCategoryList from "@/components/pages/MiddleCategoryList";
 import { TopCategoryType } from "@/types/ResponseTypes";
 import { MiddleCategoryType } from "@/types/ResponseTypes";
+import QuickMenu from "@/components/pages/QuickMenu";
 
 const page = async ({
   searchParams,
@@ -29,9 +30,10 @@ const page = async ({
   );
 
   return (
-    <main className="w-full">
-      <div className="grid grid-cols-12">
-        <div className="col-span-3 bg-slate-400">
+    <main className="w-full h-svh overflow-hidden fixed top-[70px] left-0 bg-white z-[200]">
+      <QuickMenu />
+      <div className="grid grid-cols-12 border-t-[1px] border-gray-200">
+        <div className="col-span-4">
           <TopCategoryList
             data={topCategoryData}
             categoryName={decodeURIComponent(searchParams.topCategoryName)}

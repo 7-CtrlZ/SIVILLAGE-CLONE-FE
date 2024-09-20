@@ -1,20 +1,53 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Input } from "../ui/input";
-import { SignUpErrorType } from "@/types/ErrorTypes";
+import { signUpSchema } from "@/schema/signUpSchema";
+import { SignUpFormValuesType, SignUpErrorType } from "@/types/SignUpFormTypes";
 
-export default function SignUpField({
-  handleChange,
-  errorMessages,
-}: {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errorMessages: {
-    email: string;
-    password: string;
-    confirmPassword: string;
-    name: string;
-    phoneNumber: string;
+export default function SignUpField() {
+  const [inputValues, setInputValues] = useState<SignUpFormValuesType>({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
+    phone: "",
+    role: "멤버",
+  });
+  const [errorMessages, setErrorMessages] = useState<SignUpErrorType>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    const updatedValues = {
+      ...inputValues,
+      [name]: value,
+    };
+    const res = signUpSchema.safeParse(updatedValues);
+    console.log(res.error?.errors);
+
+    if (!res.success) {
+      const fieldErrors: Partial<SignUpErrorType> = {};
+      res.error.errors.forEach((error) => {
+        const fieldName = error.path[0] as keyof SignUpErrorType;
+        fieldErrors[fieldName] = error.message;
+      });
+      setErrorMessages(fieldErrors);
+    } else {
+      if (updatedValues.password && updatedValues.confirmPassword) {
+        if (updatedValues.password !== updatedValues.confirmPassword) {
+          setErrorMessages((prev) => ({
+            ...prev,
+            confirmPassword: "비밀번호가 일치하지 않습니다.",
+          }));
+        }
+      } else {
+        console.log("success");
+        setErrorMessages((prev) => ({ ...prev, [name]: "" }));
+      }
+
+      setInputValues(updatedValues);
+    }
   };
-}) {
   return (
     <>
       <Input
@@ -24,7 +57,7 @@ export default function SignUpField({
         onChange={handleChange}
       />
       <p className="text-red-500 text-xs">
-        {errorMessages.email ? errorMessages.email : null}
+        {inputValues.email && errorMessages.email ? errorMessages.email : null}
       </p>
       <Input
         type="password"
@@ -33,16 +66,20 @@ export default function SignUpField({
         onChange={handleChange}
       />
       <p className="text-red-500 text-xs">
-        {errorMessages.password ? errorMessages.password : null}
+        {inputValues.password && errorMessages.password
+          ? errorMessages.password
+          : null}
       </p>
       <Input
         type="password"
-        name="confirm-password"
-        placeholder="confirm-pass"
+        name="confirmPassword"
+        placeholder="비밀번호 확인"
         onChange={handleChange}
       />
       <p className="text-red-500 text-xs">
-        {errorMessages.confirmPassword ? errorMessages.confirmPassword : null}
+        {inputValues.confirmPassword && errorMessages.confirmPassword
+          ? errorMessages.confirmPassword
+          : null}
       </p>
 
       <Input
@@ -51,37 +88,18 @@ export default function SignUpField({
         placeholder="name"
         onChange={handleChange}
       />
+      <p className="text-red-500 text-xs">
+        {inputValues.name && errorMessages.name ? errorMessages.name : null}
+      </p>
       <Input
         type="text"
-        name="phoneNumber"
-        placeholder="phoneNumber"
+        name="phone"
+        placeholder="전화번호"
         onChange={handleChange}
       />
-      {/* <Input
-        type="text"
-        name="nickname"
-        placeholder="nickname"
-        onChange={handleChange}
-      />
-      <Input
-        type="date-local"
-        name="birth"
-        placeholder="birth"
-        onChange={handleChange}
-      />
-      <Input
-        type="text"
-        name="address"
-        placeholder="address"
-        onChange={handleChange}
-      />
-      {/* radio button select gender */}
-      {/* <Input
-        type="text"
-        name="gender"
-        placeholder="gender"
-        onChange={handleChange}
-      />  */}
+      <p className="text-red-500 text-xs">
+        {inputValues.phone && errorMessages.phone ? errorMessages.phone : null}
+      </p>
     </>
   );
 }

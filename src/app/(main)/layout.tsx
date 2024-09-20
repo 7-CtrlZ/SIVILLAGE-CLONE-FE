@@ -1,14 +1,13 @@
 import React from "react";
 import MainHeader from "../../components/layouts/MainHeader";
-import AuthProvider from "@/components/providers/Authproviders";
+import BottomTab from "@/components/layouts/BottomTab";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <AuthProvider>
-        <MainHeader />
-        {children}
-      </AuthProvider>
+      <MainHeader />
+      {children}
+      <BottomTab />
     </>
   );
 };

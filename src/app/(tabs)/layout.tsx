@@ -1,3 +1,4 @@
+import BottomTab from "@/components/layouts/BottomTab";
 import TabLayoutHeader from "@/components/layouts/TabLayoutHeader";
 import React from "react";
 
@@ -6,6 +7,7 @@ function layout({ children }: { children: React.ReactNode }) {
     <>
       <TabLayoutHeader />
       {children}
+      <BottomTab />
     </>
   );
 }
