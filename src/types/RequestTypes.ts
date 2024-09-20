@@ -4,8 +4,4 @@ export interface SignUpRequestType {
   name: string;
   phone: string;
   role: string;
-  // nickname: string;
-  // birth: string;
-  // address: string;
-  // gender: "남성" | "여성" | "기타";
 }

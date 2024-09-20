@@ -8,11 +8,11 @@ export const metadata: Metadata = {
 };
 
 const page = async () => {
-  // const handleSignUp = async (signUpFormData: FormData) => {
-  //   "use server";
-  //   const res = await signUpAction(signUpFormData);
-  //   // console.log(res);
-  // };
+  const handleSignUp = async (signUpFormData: FormData) => {
+    "use server";
+    const res = await signUpAction(signUpFormData);
+    console.log("page 파일 회원가입 시도 결과: ", res);
+  };
   return (
     <main>
       <SignUpForm />

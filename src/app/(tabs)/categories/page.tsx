@@ -7,6 +7,7 @@ import TopCategoryList from "@/components/pages/TopCategoryList";
 import MiddleCategoryList from "@/components/pages/MiddleCategoryList";
 import { TopCategoryType } from "@/types/ResponseTypes";
 import { MiddleCategoryType } from "@/types/ResponseTypes";
+import QuickMenu from "@/components/pages/QuickMenu";
 
 const page = async ({
   searchParams,
@@ -15,44 +16,36 @@ const page = async ({
 }) => {
   const topCategoryData: TopCategoryType[] = await getTopCategories();
 
-  if (!searchParams.topCategoryCode && topCategoryData.length > 0) {
-    searchParams.topCategoryCode = topCategoryData[0].topCategoryCode;
+  if (!searchParams.topCategoryName && topCategoryData.length > 0) {
+    searchParams.topCategoryName = topCategoryData[0].topCategoryName;
   } else if (topCategoryData.length === 0) {
     return <div>Loading...</div>;
   }
 
-  console.log(topCategoryData);
-  console.log(searchParams.topCategoryCode);
+  // console.log(topCategoryData);
+  console.log("선택된 탑 카테고리", searchParams.topCategoryName);
 
   const middleCategories = await getMiddleCategories(
-    searchParams.topCategoryCode
+    searchParams.topCategoryName
   );
 
   return (
-    <main className="w-full">
-      <div className="grid grid-cols-12">
-        <div className="col-span-3 bg-slate-400">
+    <main className="w-full h-svh overflow-hidden fixed top-[70px] left-0 bg-white z-[200]">
+      <QuickMenu />
+      <div className="grid grid-cols-12 border-t-[1px] border-gray-200">
+        <div className="col-span-4">
           <TopCategoryList
             data={topCategoryData}
-            categoryCode={decodeURIComponent(searchParams.topCategoryCode)}
+            categoryName={decodeURIComponent(searchParams.topCategoryName)}
           />
         </div>
         <MiddleCategoryList
-          categoryCode={decodeURIComponent(searchParams.topCategoryCode)}
+          categoryName={decodeURIComponent(searchParams.topCategoryName)}
           data={middleCategories}
         />
       </div>
     </main>
   );
 };
-
-export async function generateStaticParams() {
-  const categories: TopCategoryType[] = await getTopCategories();
-  // console.log("카테고리 데이터: ", categories);
-  return categories.map((category) => ({
-    topCategoryCode: category.topCategoryCode,
-    topCategoryName: category.topCategoryName,
-  }));
-}
 
 export default page;
