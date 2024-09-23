@@ -1,6 +1,6 @@
 // import { dummyTopCategoryListData } from "@/datas/dummyTopCategoryListData";
 import { CommonResType, TopCategoryType } from "@/types/ResponseTypes";
-import { MiddleCategoryType, ProductListType } from "@/types/ResponseTypes";
+import { MiddleCategoryType, productcodelist } from "@/types/ResponseTypes";
 
 export async function getTopCategories(): Promise<TopCategoryType[]> {
   "use server";
@@ -51,40 +51,4 @@ export async function getMiddleCategories(
     console.error("Error fetching middle categories:", error);
     throw error;
   }
-}
-
-export async function getCategoryProducts(
-  categoryName: string,
-  categoryLevel: "top" | "middle" | "bottom" | "sub"
-): Promise<ProductListType[]> {
-  let queryParam = "";
-  switch (categoryLevel) {
-    case "top":
-      queryParam = `topCategoryName=${categoryName}`;
-      break;
-    case "middle":
-      queryParam = `middleCategoryName=${categoryName}`;
-      break;
-    case "bottom":
-      queryParam = `bottomCategoryName=${categoryName}`;
-      break;
-    case "sub":
-      queryParam = `subCategoryName=${categoryName}`;
-      break;
-    default:
-      throw new Error("이런 카테고리 depth 없음!");
-  }
-  const response = await fetch(
-    `${process.env.SERVER_URL}/api/v1/vendor/productCategoryList?${queryParam}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  const products = await response.json();
-  console.log("받아온 상품 데이터", products);
-
-  return products.data;
 }

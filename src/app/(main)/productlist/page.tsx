@@ -1,8 +1,13 @@
 import React from "react";
-import { getCategoryProducts } from "@/actions/initial/categoryActions";
+import {
+  getCategoryProducts,
+  getProductDetailByProductCode,
+} from "@/actions/products/productActions";
 // import { ProductType } from '@/types/ResponseTypes';
-// import { dummyProductData } from "@/datas/dummyProductData";
+import { dummyProductDataList } from "@/datas/dummyProductData";
 import { CategoryLevel } from "@/types/productTypes";
+import { productcodelist } from "@/types/ResponseTypes";
+import ProductListCard from "@/components/layouts/ProductListCard";
 
 const page = async ({
   searchParams,
@@ -31,23 +36,30 @@ const page = async ({
     categoryLevel = "top";
   }
 
-  const products =
+  const productCodeList: productcodelist[] =
     categoryName && categoryLevel
-      ? await getCategoryProducts(categoryName, categoryLevel)
+      ? // ? await getCategoryProducts(categoryName, categoryLevel)
+        [{ productCode: "e4885883" }, { productCode: "a4d9f2e2" }]
       : [];
-  console.log("product 목록: ", products);
+  // console.log("product Code 목록: ", productCodeList);
+
+  const products =
+    // await Promise.all(
+    //   productCodeList.map((productCode) =>
+    //     getProductDetailByProductCode(productCode.productCode)
+    //   )
+    // );
+    dummyProductDataList;
 
   return (
-    <main className="w-full">
-      <div className="container">
-        <h1>카테고리 이름: {categoryName}</h1>
-        <h2>카테고리 레벨: {categoryLevel}</h2>
-        <ul>
-          {products.map((product) => (
-            <li key={product.productCode}>{product.productCode}</li>
+    <main>
+      <section className="px-6 py-10">
+        <ul className="grid grid-cols-2 justify-between gap-4">
+          {products.map((productData, index) => (
+            <ProductListCard key={index} productData={productData.data} />
           ))}
         </ul>
-      </div>
+      </section>
     </main>
   );
 };
