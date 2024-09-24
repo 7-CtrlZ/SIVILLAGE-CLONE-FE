@@ -69,6 +69,31 @@ export interface SubCategoryType {
   subCategoryName: string;
 }
 
-export interface ProductListType {
-  productCode: number;
+export interface productcodelist {
+  productCode: string;
+}
+
+export interface ProductDetail {
+  productUuid: string;
+  productCode: string;
+  brandId: number;
+  brandName: string;
+  productName: string;
+  productDescription: string;
+  price: number;
+  discount: number;
+  finalPrice: number;
+  options: { mainOptionId: number }[];
+  isliked: boolean;
+}
+
+export interface ProductImages {
+  mainOptionId: number;
+  imageUrl: string;
+  imageDescription: string;
+  isMainImage: boolean;
+}
+
+export interface ProductListPageProps {
+  products: ProductDetail[];
 }

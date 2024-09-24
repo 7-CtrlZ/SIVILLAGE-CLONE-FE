@@ -1,23 +1,41 @@
-"use client";
 import React from "react";
-import CategoryHandler from "@/app/(main)/productlist/CategoryHandler";
-import { ClientComponentProps } from "@/types/productTypes";
+import ProductListCard from "../layouts/ProductListCard";
+// import { getProductListByCategory } from "@/api/product"; // API 연결
 
 const ProductList = ({
-  products,
-  categoryCode,
-  categoryLevel,
-}: ClientComponentProps) => {
+  searchParams,
+}: {
+  searchParams: {
+    topCategoryName?: string | null;
+    middleCategoryName?: string | null;
+    bottomCategoryName?: string | null;
+    subCategoryName?: string | null;
+  };
+}) => {
+  console.log("searchParams", searchParams);
+  // const getProductList = await getProductListByCategory(
+  //   searchParams.topCategoryName,
+  //   searchParams.middleCategoryName,
+  //   searchParams.bottomCategoryName
+  // );
+
+  const getProductList = [
+    { productCode: "a4d9f2e2" },
+    { productCode: "a4d9f2e3" },
+    { productCode: "a4d9f2e4" },
+    { productCode: "a4d9f2e5" },
+  ];
+
   return (
-    <div>
-      <CategoryHandler
-        categoryCode={categoryCode}
-        categoryLevel={categoryLevel}
-      />
-      {products?.map((product) => (
-        <div key={product.productCode}>{product.productCode}</div>
-      ))}
-    </div>
+    <main>
+      <section className="px-6 py-10">
+        <ul className="grid grid-cols-2 justify-between gap-4">
+          {getProductList.map((product, index) => (
+            <ProductListCard key={index} productCode={product.productCode} />
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 };
 
