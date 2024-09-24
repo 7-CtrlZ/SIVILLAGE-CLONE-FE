@@ -1,63 +1,46 @@
-import React from "react";
+import React from 'react';
 import {
   getCategoryProducts,
   getProductDetailByProductCode,
-} from "@/actions/products/productActions";
+} from '@/actions/products/productActions';
 // import { ProductType } from '@/types/ResponseTypes';
-import { dummyProductDataList } from "@/datas/dummyProductData";
-import { CategoryLevel } from "@/types/productTypes";
-import { productcodelist } from "@/types/ResponseTypes";
-import ProductListCard from "@/components/layouts/ProductListCard";
+import { dummyProductDataList } from '@/datas/dummyProductData';
+import { CategoryLevel } from '@/types/productTypes';
+import { productcodelist } from '@/types/ResponseTypes';
+import ProductListCard from '@/components/layouts/ProductListCard';
 
 const page = async ({
   searchParams,
 }: {
   searchParams: {
-    topCategoryName?: string | null;
-    middleCategoryName?: string | null;
-    bottomCategoryName?: string | null;
-    subCategoryName?: string | null;
+    topCategoryName?: string | undefined;
+    middleCategoryName?: string | undefined;
+    bottomCategoryName?: string | undefined;
+    subCategoryName?: string | undefined;
   };
 }) => {
-  let categoryName: string | null = null;
-  let categoryLevel: CategoryLevel | null = null;
+  console.log(searchParams);
 
-  if (searchParams.subCategoryName) {
-    categoryName = searchParams.subCategoryName;
-    categoryLevel = "sub";
-  } else if (searchParams.bottomCategoryName) {
-    categoryName = searchParams.bottomCategoryName;
-    categoryLevel = "bottom";
-  } else if (searchParams.middleCategoryName) {
-    categoryName = searchParams.middleCategoryName;
-    categoryLevel = "middle";
-  } else if (searchParams.topCategoryName) {
-    categoryName = searchParams.topCategoryName;
-    categoryLevel = "top";
-  }
-
-  const productCodeList: productcodelist[] =
-    categoryName && categoryLevel
-      ? // ? await getCategoryProducts(categoryName, categoryLevel)
-        [{ productCode: "e4885883" }, { productCode: "a4d9f2e2" }]
-      : [];
-  // console.log("product Code 목록: ", productCodeList);
-
-  const products =
-    // await Promise.all(
-    //   productCodeList.map((productCode) =>
-    //     getProductDetailByProductCode(productCode.productCode)
-    //   )
-    // );
-    dummyProductDataList;
+  const getProducts = await getCategoryProducts(
+    searchParams.topCategoryName !== 'undefined'
+      ? searchParams.topCategoryName
+      : null,
+    searchParams.middleCategoryName !== 'undefined'
+      ? searchParams.middleCategoryName
+      : null,
+    searchParams.bottomCategoryName !== 'undefined'
+      ? searchParams.bottomCategoryName
+      : null
+  );
+  console.log(getProducts);
 
   return (
     <main>
       <section className="px-6 py-10">
         <ul className="grid grid-cols-2 justify-between gap-4">
-          {products.map((productData, index) => (
+          {/* {products.map((productData, index) => (
             <ProductListCard key={index} productData={productData.data} />
-          ))}
+          ))} */}
         </ul>
       </section>
     </main>

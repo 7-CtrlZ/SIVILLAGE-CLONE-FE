@@ -1,22 +1,33 @@
-import React from "react";
-import ShoppingBagIcon from "../icons/ShoppingBagIcon";
-import { dummyCartData } from "../../datas/dummyCartData";
-import Link from "next/link";
+'use client';
+import React, { useEffect, useState } from 'react';
+import ShoppingBagIcon from '../icons/ShoppingBagIcon';
+import Link from 'next/link';
+import { useCustomSession } from '@/context/SessionContext';
+import { getCartCount } from '@/actions/cart/cartAction';
 
-const CartIconWithCount: React.FC = () => {
-  const totalItemsInCart = dummyCartData.total_quantity;
-  // console.log(totalItemsInCart);
+const CartIconWithCount = () => {
+  const isAuth = useCustomSession();
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    if (!isAuth) return;
+    console.log('isAuth', isAuth);
+    const getCount = async () => {
+      const res = await getCartCount();
+      setCartCount(res);
+    };
+
+    getCount();
+  }, [isAuth]);
 
   return (
-    <Link href="/cart">
-      <div className="relative">
-        <ShoppingBagIcon />
-        {totalItemsInCart > 0 && (
-          <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-            {totalItemsInCart}
-          </span>
-        )}
-      </div>
+    <Link href="/cart" className="relative">
+      <ShoppingBagIcon />
+      {isAuth && cartCount > 0 && (
+        <span className="absolute top-[-3px] right-[-3px] bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+          {cartCount}
+        </span>
+      )}
     </Link>
   );
 };
