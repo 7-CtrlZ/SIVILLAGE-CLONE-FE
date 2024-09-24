@@ -1,4 +1,4 @@
-"use server";
+'use server';
 // import {
 //   colorType,
 //   cursorDataType,
@@ -13,40 +13,40 @@
 //   fetchDataRevaliDateTime,
 // } from '../../hooks/fetchDataHook';
 
-import { productcodelist } from "@/types/ResponseTypes";
+import { productcodelist } from '@/types/ResponseTypes';
 
 export async function getCategoryProducts(
-  categoryName: string,
-  categoryLevel: "top" | "middle" | "bottom" | "sub"
+  topCategoryName?: string | null,
+  middleCategoryName?: string | null,
+  bottomCategoryName?: string | null,
+  page?: number | null,
+  pageSize?: number | null,
+  lastId?: number | null
 ): Promise<string[]> {
-  let queryParam = "";
-  switch (categoryLevel) {
-    case "top":
-      queryParam = `topCategoryName=${categoryName}`;
-      break;
-    case "middle":
-      queryParam = `middleCategoryName=${categoryName}`;
-      break;
-    case "bottom":
-      queryParam = `bottomCategoryName=${categoryName}`;
-      break;
-    case "sub":
-      queryParam = `subCategoryName=${categoryName}`;
-      break;
-    default:
-      throw new Error("이런 카테고리 depth 없음!");
-  }
-  const response = await fetch(
-    `${process.env.SERVER_URL}/api/v1/vendor/productCategoryList?${queryParam}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const params = new URLSearchParams();
+
+  if (page) params.append('page', String(page));
+  if (pageSize) params.append('pageSize', String(pageSize));
+  if (lastId) params.append('lastId', String(lastId));
+  if (topCategoryName)
+    params.append('topCategoryCode', decodeURIComponent(topCategoryName));
+  if (middleCategoryName)
+    params.append('middleCategoryCode', decodeURIComponent(middleCategoryName));
+  if (bottomCategoryName)
+    params.append('bottomCategoryCode', decodeURIComponent(bottomCategoryName));
+
+  const fetchUrl = `${
+    process.env.SERVER_URL
+  }/api/v1/vendor/productCategoryList?${params.toString()}`;
+
+  const response = await fetch(fetchUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   const products = await response.json();
-  console.log("받아온 상품 데이터", products);
+  console.log('받아온 상품 데이터', products);
 
   return products.data;
 }
@@ -57,14 +57,14 @@ export async function getProductDetailByProductCode(
   const response = await fetch(
     `${process.env.SERVER_URL}/api/v1/product/${productCode}`,
     {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     }
   );
   const product = await response.json();
-  console.log("받아온 상품 데이터", product);
+  console.log('받아온 상품 데이터', product);
 
   return product.data;
 }

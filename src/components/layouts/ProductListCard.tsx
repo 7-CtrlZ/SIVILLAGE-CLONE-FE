@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import LikeHeart from "@/components/ui/likeHeart";
-import { TextUi } from "@/components/ui/TextUi";
-import { ProductDetail } from "@/types/ResponseTypes";
-import ColorChips from "../ui/colorChips";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import LikeHeart from '@/components/ui/likeHeart';
+import { TextUi } from '@/components/ui/TextUi';
+import { ProductDetail } from '@/types/ResponseTypes';
+import ColorChips from '../ui/colorChips';
 import {
   dummyProductDataImage,
   dummyProductDataImage2,
-} from "@/datas/dummyProductData";
-import { Star } from "lucide-react";
+} from '@/datas/dummyProductData';
+import { Star } from 'lucide-react';
 
 function ProductListCard({ productData }: { productData: ProductDetail }) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string>();
   const [loading, setLoading] = useState(false);
 
   // API 요청을 통해 선택된 mainOptionId에 해당하는 이미지를 받아오는 함수
@@ -33,7 +33,7 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
     )?.imageUrl;
     if (mainImage) {
       setSelectedImage(mainImage);
-      console.log("이미지 요청 성공:", mainImage);
+      console.log('이미지 요청 성공:', mainImage);
     }
     // } catch (error) {
     //   console.error("이미지 요청 실패:", error);
@@ -55,10 +55,7 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
         <div className="w-full h-auto bg-gray-100">
           <Image
             className="object-cover bg-transparent"
-            src={
-              selectedImage ||
-              "https://image.sivillage.com/upload/C00001/goods/org/049/230714005716049.jpg"
-            }
+            src={selectedImage}
             alt="product"
             width={300}
             height={300}
@@ -66,15 +63,15 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
           />
         </div>
       </Link>
-      <TextUi size={"sm"} className="font-extrabold py-3">
+      <TextUi size={'sm'} className="font-extrabold py-3">
         {productData.brandName}
       </TextUi>
-      <TextUi size={"xs"} className="">
+      <TextUi size={'xs'} className="">
         {productData.productName}
       </TextUi>
-      <TextUi size={"xs"} variant={"darkGray"} className="py-2">
+      <TextUi size={'xs'} variant={'darkGray'} className="py-2">
         {productData.discount > 0 && (
-          <span className="font-bold mr-[4px]" style={{ color: "#D99C63" }}>
+          <span className="font-bold mr-[4px]" style={{ color: '#D99C63' }}>
             {productData.discount}%
           </span>
         )}
@@ -84,10 +81,10 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
       </TextUi>
       <div className="flex items-center">
         <Star fill="black" size={16} />
-        <TextUi size={"xs"} className="py-1 pl-1 pr-0.5">
+        <TextUi size={'xs'} className="py-1 pl-1 pr-0.5">
           5
         </TextUi>
-        <TextUi size={"xs"} variant={"lightGray"} className="py-1">
+        <TextUi size={'xs'} variant={'lightGray'} className="py-1">
           (25)
         </TextUi>
       </div>

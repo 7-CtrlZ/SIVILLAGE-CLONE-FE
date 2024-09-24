@@ -1,25 +1,21 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import ArrowLeftIcon from "../icons/ArrowLeftIcon";
-import SearchIcon from "../icons/SearchIcon";
-import ShoppingBagIcon from "../icons/ShoppingBagIcon";
-import TitleHeader from "../ui/TitleHeader";
-import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+'use client';
+import React, { useEffect, useState } from 'react';
+import ArrowLeftIcon from '../icons/ArrowLeftIcon';
+import SearchIcon from '../icons/SearchIcon';
+import ShoppingBagIcon from '../icons/ShoppingBagIcon';
+import TitleHeader from '../ui/TitleHeader';
+import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 export default function AuthServiceHeaderCsr() {
   const pathName = usePathname();
-  const auth = useSession();
-  console.log("로그인폼 auth의 data 속성값(세션 정보): ", auth.data);
-  // console.log(pathName)
-
-  const [title, setTitle] = useState<string>("");
+  const [title, setTitle] = useState<string>('');
 
   useEffect(() => {
-    if (pathName === "/sign-in") {
-      setTitle("로그인");
-    } else if (pathName === "/sign-up") {
-      setTitle("회원가입");
+    if (pathName === '/sign-in') {
+      setTitle('로그인');
+    } else if (pathName === '/sign-up') {
+      setTitle('회원가입');
     }
   }, [pathName]);
 
