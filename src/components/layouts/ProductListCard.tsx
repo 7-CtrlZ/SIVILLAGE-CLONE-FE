@@ -1,49 +1,52 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import LikeHeart from '@/components/ui/likeHeart';
 import { TextUi } from '@/components/ui/TextUi';
 import { ProductDetail } from '@/types/ResponseTypes';
 import ColorChips from '../ui/colorChips';
-import {
-  dummyProductDataImage,
-  dummyProductDataImage2,
-} from '@/datas/dummyProductData';
 import { Star } from 'lucide-react';
 
 function ProductListCard({ productData }: { productData: ProductDetail }) {
   const [selectedImage, setSelectedImage] = useState<string>();
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // API 요청을 통해 선택된 mainOptionId에 해당하는 이미지를 받아오는 함수
   const fetchImageByOptionId = async (optionId: number) => {
     setLoading(true);
-    // try {
-    //   const response = await fetch(`${process.env.SERVER_URL}/api/v1/option/mainOption/${optionId}/images`); // mainOptionId로 API 호출
-    //   const data = await response.json();
-    const data = dummyProductDataImage.find(
-      (img) => img.mainOptionId === optionId
-    );
-    // 예시: data.images 배열에서 isMainImage가 true인 이미지 선택
-    // const mainImage = data.data.find((img: any) => img.isMainImage)?.imageUrl;
-    const mainImage = data?.images.find(
-      (img: any) => img.isMainImage
-    )?.imageUrl;
-    if (mainImage) {
-      setSelectedImage(mainImage);
-      console.log('이미지 요청 성공:', mainImage);
+
+    try {
+      const response = await fetch(
+        `${process.env.SERVER_URL}/api/v1/option/mainOptionId/${optionId}/images`
+      ); // mainOptionId로 API 호출
+      const data = await response.json();
+      // console.log('이미지 요청 성공:', data);
+      const mainImage = data.data.find((img: any) => img.isMainImage)?.imageUrl;
+      if (mainImage) {
+        setSelectedImage(mainImage);
+        console.log('이미지 요청 성공:', mainImage);
+      }
+    } catch (error) {
+      console.error('이미지 요청 실패:', error);
+    } finally {
+      setLoading(false);
     }
-    // } catch (error) {
-    //   console.error("이미지 요청 실패:", error);
-    // } finally {
-    //   setLoading(false);
-    // }
   };
+
+  // 처음 렌더링 시 자동으로 mainOptionId를 이용해 이미지를 가져옴
+  useEffect(() => {
+    if (productData.mainOptionList && productData.mainOptionList.length > 0) {
+      const defaultOptionId = productData.mainOptionList[0].mainOptionId;
+      fetchImageByOptionId(defaultOptionId);
+      setSelectedOption(defaultOptionId);
+    }
+  }, [productData.mainOptionList]);
 
   const handleColorChipClick = (optionId: number) => {
     fetchImageByOptionId(optionId);
+    setSelectedOption(optionId);
   };
 
   return (
@@ -55,11 +58,13 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
         <div className="w-full h-auto bg-gray-100">
           <Image
             className="object-cover bg-transparent"
-            src={selectedImage}
-            alt="product"
-            width={300}
-            height={300}
-            priority
+            src={
+              selectedImage ??
+              'https://image.sivillage.com/upload/C00001/goods/org/049/230714005716049.jpg'
+            }
+            alt="product image"
+            width={166.31}
+            height={259.47}
           />
         </div>
       </Link>
@@ -70,13 +75,13 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
         {productData.productName}
       </TextUi>
       <TextUi size={'xs'} variant={'darkGray'} className="py-2">
-        {productData.discount > 0 && (
+        {/* {productData.discount > 0 && (
           <span className="font-bold mr-[4px]" style={{ color: '#D99C63' }}>
             {productData.discount}%
           </span>
-        )}
+        )} */}
         <span className="font-medium">
-          {productData.finalPrice.toLocaleString()}
+          {productData.price.toLocaleString()}
         </span>
       </TextUi>
       <div className="flex items-center">
@@ -88,10 +93,21 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
           (25)
         </TextUi>
       </div>
-      <ColorChips
-        options={productData.options}
-        onChipClick={handleColorChipClick}
-      />
+      <div className="flex">
+        {productData.mainOptionList.map(
+          (option) => (
+            console.log('option', option),
+            (
+              <ColorChips
+                key={option.mainOptionId}
+                options={option}
+                onChipClick={handleColorChipClick}
+                isSelected={selectedOption === option.mainOptionId}
+              />
+            )
+          )
+        )}
+      </div>
     </li>
   );
 }

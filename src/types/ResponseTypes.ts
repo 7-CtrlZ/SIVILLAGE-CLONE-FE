@@ -74,17 +74,16 @@ export interface productcodelist {
 }
 
 export interface ProductDetail {
-  productUuid: string;
+  // productUuid: string;
   productCode: string;
-  brandId: number;
+  // brandId: number;
   brandName: string;
   productName: string;
   productDescription: string;
+  productDetailContent: string;
   price: number;
-  discount: number;
-  finalPrice: number;
-  options: { mainOptionId: number }[];
-  isliked: boolean;
+  mainOptionList: { mainOptionId: number; mainOptionName: string }[];
+  // isliked: boolean;
 }
 
 export interface ProductImages {

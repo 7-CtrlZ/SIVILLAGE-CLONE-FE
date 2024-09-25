@@ -19,21 +19,22 @@ export async function getCategoryProducts(
   topCategoryName?: string | null,
   middleCategoryName?: string | null,
   bottomCategoryName?: string | null,
+  subCategoryName?: string | null,
   page?: number | null,
   pageSize?: number | null,
   lastId?: number | null
-): Promise<string[]> {
+): Promise<productcodelist[]> {
   const params = new URLSearchParams();
 
   if (page) params.append('page', String(page));
   if (pageSize) params.append('pageSize', String(pageSize));
   if (lastId) params.append('lastId', String(lastId));
-  if (topCategoryName)
-    params.append('topCategoryCode', decodeURIComponent(topCategoryName));
+  if (topCategoryName) params.append('topCategoryName', topCategoryName);
   if (middleCategoryName)
-    params.append('middleCategoryCode', decodeURIComponent(middleCategoryName));
+    params.append('middleCategoryName', middleCategoryName);
   if (bottomCategoryName)
-    params.append('bottomCategoryCode', decodeURIComponent(bottomCategoryName));
+    params.append('bottomCategoryName', bottomCategoryName);
+  if (subCategoryName) params.append('subCategoryName', subCategoryName);
 
   const fetchUrl = `${
     process.env.SERVER_URL
@@ -44,16 +45,16 @@ export async function getCategoryProducts(
     headers: {
       'Content-Type': 'application/json',
     },
+    cache: 'no-cache',
   });
   const products = await response.json();
-  console.log('받아온 상품 데이터', products);
+  console.log('받아온 상품 id 목록 데이터', products);
 
   return products.data;
 }
 
-export async function getProductDetailByProductCode(
-  productCode: string
-): Promise<productcodelist> {
+export async function getProductDetailByProductCode(productCode: string) {
+  // console.log('productCode', productCode);
   const response = await fetch(
     `${process.env.SERVER_URL}/api/v1/product/${productCode}`,
     {
@@ -61,10 +62,16 @@ export async function getProductDetailByProductCode(
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'no-cache',
     }
   );
+
+  if (!response.ok) {
+    // console.log('response: ', response);
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
   const product = await response.json();
-  console.log('받아온 상품 데이터', product);
+  // console.log('받아온 상품 상세 데이터', product);
 
   return product.data;
 }

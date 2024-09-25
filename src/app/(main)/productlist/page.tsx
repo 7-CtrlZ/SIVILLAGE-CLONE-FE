@@ -19,7 +19,7 @@ const page = async ({
     subCategoryName?: string | undefined;
   };
 }) => {
-  console.log(searchParams);
+  // console.log(searchParams);
 
   const getProducts = await getCategoryProducts(
     searchParams.topCategoryName !== 'undefined'
@@ -32,15 +32,22 @@ const page = async ({
       ? searchParams.bottomCategoryName
       : null
   );
-  console.log(getProducts);
+
+  const productDetails = await Promise.all(
+    getProducts.map((product) =>
+      getProductDetailByProductCode(product.productCode)
+    )
+  );
+
+  console.log('액션 통해서 받아온 상품 상세 데이터', productDetails);
 
   return (
-    <main>
+    <main className="mb-[50px]">
       <section className="px-6 py-10">
         <ul className="grid grid-cols-2 justify-between gap-4">
-          {/* {products.map((productData, index) => (
-            <ProductListCard key={index} productData={productData.data} />
-          ))} */}
+          {productDetails.map((productData, index) => (
+            <ProductListCard key={index} productData={productData} />
+          ))}
         </ul>
       </section>
     </main>
