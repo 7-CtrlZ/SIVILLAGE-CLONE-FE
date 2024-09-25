@@ -1,14 +1,21 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Authprovider from '@/components/providers/Authproviders';
 import './globals.css';
-import { getTopCategories } from '@/actions/initial/categoryActions';
+import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import BottomTab from '@/components/layouts/BottomTab';
 import AuthContextProvider from '@/provider/AuthContextProvider';
 import { getServerSession } from 'next-auth';
 import { options } from './api/auth/[...nextauth]/options';
+import ScrollToTopButton from '@/components/icons/ScrollToTopButton';
 
 const inter = Inter({ subsets: ['latin'] });
+
+const pretendardVariable = localFont({
+  src: '../../public/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-pretendard',
+});
 
 export const metadata: Metadata = {
   title: 'S.I.VILLAGE by Ctrl + Z',
@@ -24,11 +31,12 @@ export default async function RootLayout({
   const isAuth = session?.user ? true : false;
   console.log('isAuth', isAuth);
   return (
-    <html lang="ko">
+    <html lang="ko" className={pretendardVariable.variable}>
       <body className={inter.className}>
         <AuthContextProvider isAuth={isAuth}>
           {children}
           <BottomTab />
+          <ScrollToTopButton />
         </AuthContextProvider>
       </body>
     </html>

@@ -4,6 +4,7 @@ import ShoppingBagIcon from '../icons/ShoppingBagIcon';
 import Link from 'next/link';
 import { useCustomSession } from '@/context/SessionContext';
 import { getCartCount } from '@/actions/cart/cartAction';
+import NotiCountView from '@/components/ui/NotiCountView';
 
 const CartIconWithCount = () => {
   const isAuth = useCustomSession();
@@ -23,11 +24,7 @@ const CartIconWithCount = () => {
   return (
     <Link href="/cart" className="relative">
       <ShoppingBagIcon />
-      {isAuth && cartCount > 0 && (
-        <span className="absolute top-[-3px] right-[-3px] bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-          {cartCount}
-        </span>
-      )}
+      {isAuth && cartCount > 0 && <NotiCountView count={cartCount} />}
     </Link>
   );
 };

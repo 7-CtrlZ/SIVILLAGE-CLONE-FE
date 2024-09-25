@@ -6,7 +6,7 @@ import Logo from '../ui/Logo';
 
 const MainHeader = () => {
   return (
-    <header className="flex items-center justify-between w-[370px] h-[56px] mr-[16px]">
+    <header className="flex items-center justify-between w-full h-[56px] pr-[16px]">
       <Link href="/">
         <h1 className="text-[0px]">S.I.VILLAGE</h1>
         <Logo />
