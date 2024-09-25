@@ -45,6 +45,7 @@ export async function getCategoryProducts(
     headers: {
       'Content-Type': 'application/json',
     },
+    cache: 'no-cache',
   });
   const products = await response.json();
   console.log('받아온 상품 id 목록 데이터', products);
@@ -61,6 +62,7 @@ export async function getProductDetailByProductCode(productCode: string) {
       headers: {
         'Content-Type': 'application/json',
       },
+      cache: 'no-cache',
     }
   );
 

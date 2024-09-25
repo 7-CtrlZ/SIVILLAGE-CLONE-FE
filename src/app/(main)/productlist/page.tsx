@@ -39,15 +39,15 @@ const page = async ({
     )
   );
 
-  // console.log('액션 통해서 받아온 상품 상세 데이터', productDetails);
+  console.log('액션 통해서 받아온 상품 상세 데이터', productDetails);
 
   return (
-    <main>
+    <main className="mb-[50px]">
       <section className="px-6 py-10">
         <ul className="grid grid-cols-2 justify-between gap-4">
-          {/* {getProducts.map((productData, index) => (
-            // <ProductListCard key={index} productData={productDetails} />
-          ))} */}
+          {productDetails.map((productData, index) => (
+            <ProductListCard key={index} productData={productData} />
+          ))}
         </ul>
       </section>
     </main>
