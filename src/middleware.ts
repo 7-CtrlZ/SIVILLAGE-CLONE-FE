@@ -36,7 +36,7 @@ const withOutAuthList = [routes.signIn];
 export default async function middleware(request: NextRequest) {
   const token = await getToken({
     req: request,
-    secret: process.env.,
+    secret: process.env.SECRET_KEY,
   });
   const accessToken = token?.accessToken;
   const { searchParams } = request.nextUrl;
