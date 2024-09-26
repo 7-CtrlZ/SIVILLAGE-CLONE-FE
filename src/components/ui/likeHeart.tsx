@@ -5,7 +5,7 @@ interface LikeHeartProps {
   isInitiallyLiked: boolean;
 }
 
-function likeHeart({ isInitiallyLiked }: LikeHeartProps) {
+function LikeHeart({ isInitiallyLiked }: LikeHeartProps) {
   const [isLiked, setIsLiked] = useState(isInitiallyLiked);
 
   const handleLikeClick = () => {
@@ -37,4 +37,4 @@ function likeHeart({ isInitiallyLiked }: LikeHeartProps) {
   );
 }
 
-export default likeHeart;
+export default LikeHeart;

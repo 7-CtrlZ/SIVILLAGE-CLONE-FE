@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import LikeHeart from '@/components/ui/likeHeart';
+import LikeHeart from '@/components/ui/LikeHeart';
 import { TextUi } from '@/components/ui/TextUi';
 import { Skeleton } from '@/components/ui/skeleton'; // Ensure Skeleton is properly typed
 import { ProductDetail } from '@/types/ResponseTypes';
