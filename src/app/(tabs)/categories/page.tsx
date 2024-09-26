@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
   getTopCategories,
   getMiddleCategories,
-} from "@/actions/initial/categoryActions";
-import TopCategoryList from "@/components/pages/TopCategoryList";
-import MiddleCategoryList from "@/components/pages/MiddleCategoryList";
-import { TopCategoryType } from "@/types/ResponseTypes";
-import { MiddleCategoryType } from "@/types/ResponseTypes";
-import QuickMenu from "@/components/pages/QuickMenu";
+} from '@/actions/initial/categoryActions';
+import TopCategoryList from '@/components/pages/TopCategoryList';
+import MiddleCategoryList from '@/components/pages/MiddleCategoryList';
+import { TopCategoryType } from '@/types/ResponseTypes';
+import { MiddleCategoryType } from '@/types/ResponseTypes';
+import QuickMenu from '@/components/pages/QuickMenu';
 
 const page = async ({
   searchParams,
@@ -23,7 +23,7 @@ const page = async ({
   }
 
   // console.log(topCategoryData);
-  console.log("선택된 탑 카테고리", searchParams.topCategoryName);
+  console.log('선택된 탑 카테고리', searchParams.topCategoryName);
 
   const middleCategories = await getMiddleCategories(
     searchParams.topCategoryName

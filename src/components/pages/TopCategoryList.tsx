@@ -1,6 +1,6 @@
-import { TopCategoryType } from "@/types/ResponseTypes";
-import Link from "next/link";
-import React from "react";
+import { TopCategoryType } from '@/types/ResponseTypes';
+import Link from 'next/link';
+import React from 'react';
 
 function TopCategoryList({
   data,
@@ -21,9 +21,9 @@ function TopCategoryList({
             <li
               className={`${
                 categoryName === category.topCategoryName
-                  ? "bg-black text-white transition-all"
-                  : "bg-white transition-all"
-              } text-left py-2 px-4 text-sm`}
+                  ? 'bg-black text-white transition-all'
+                  : 'bg-white transition-all'
+              } text-left py-2 px-4 text-sm text-[#a0a0a0] font-pretendard`}
             >
               {category.topCategoryName}
             </li>
