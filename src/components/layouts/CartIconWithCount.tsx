@@ -6,7 +6,7 @@ import { useCustomSession } from '@/context/SessionContext';
 import { getCartCount } from '@/actions/cart/cartAction';
 import NotiCountView from '@/components/ui/NotiCountView';
 
-const CartIconWithCount = () => {
+const CartIconWithCount = ({ color }: { color?: string }) => {
   const isAuth = useCustomSession();
   const [cartCount, setCartCount] = useState(0);
 
@@ -23,7 +23,7 @@ const CartIconWithCount = () => {
 
   return (
     <Link href="/cart" className="relative">
-      <ShoppingBagIcon />
+      <ShoppingBagIcon color={color} />
       {isAuth && cartCount > 0 && <NotiCountView count={cartCount} />}
     </Link>
   );
