@@ -1,4 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+import "dotenv/config";
+
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: ["image.sivillage.com", "cdn-mo.sivillage.com"],
+  },
+  env: {
+    SERVER_URL: process.env.SERVER_URL,
+  },
+};
 
 export default nextConfig;
