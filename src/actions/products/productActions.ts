@@ -23,7 +23,13 @@ export async function getCategoryProducts(
   page?: number | null,
   pageSize?: number | null,
   lastId?: number | null
-): Promise<productcodelist[]> {
+): Promise<{
+  content: productcodelist[];
+  nextCursor: number;
+  hasNext: boolean;
+  size: number;
+  page: number;
+}> {
   const params = new URLSearchParams();
 
   if (page) params.append('page', String(page));
@@ -50,7 +56,13 @@ export async function getCategoryProducts(
   const products = await response.json();
   console.log('받아온 상품 id 목록 데이터', products);
 
-  return products.data;
+  return {
+    content: products.data.content,
+    nextCursor: products.data.nextCursor,
+    hasNext: products.data.hasNext,
+    size: products.data.size,
+    page: products.data.page,
+  };
 }
 
 export async function getProductDetailByProductCode(productCode: string) {

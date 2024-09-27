@@ -30,11 +30,14 @@ const page = async ({
       : null,
     searchParams.bottomCategoryName !== 'undefined'
       ? searchParams.bottomCategoryName
+      : null,
+    searchParams.subCategoryName !== 'undefined'
+      ? searchParams.subCategoryName
       : null
   );
 
   const productDetails = await Promise.all(
-    getProducts.map((product) =>
+    getProducts.content.map((product) =>
       getProductDetailByProductCode(product.productCode)
     )
   );
