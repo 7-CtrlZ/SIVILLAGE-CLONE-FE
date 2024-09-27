@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
   getCategoryProducts,
   getProductDetailByProductCode,
@@ -8,6 +8,7 @@ import { dummyProductDataList } from '@/datas/dummyProductData';
 import { CategoryLevel } from '@/types/productTypes';
 import { productcodelist } from '@/types/ResponseTypes';
 import ProductListCard from '@/components/layouts/ProductListCard';
+import ProductListCardSkeleton from '@/components/skeletons/ProductListCardSkeleton';
 
 const page = async ({
   searchParams,
@@ -49,7 +50,9 @@ const page = async ({
       <section className="px-6 py-10">
         <ul className="grid grid-cols-2 justify-between gap-4">
           {productDetails.map((productData, index) => (
-            <ProductListCard key={index} productData={productData} />
+            <Suspense key={index} fallback={<ProductListCardSkeleton />}>
+              <ProductListCard productData={productData} />
+            </Suspense>
           ))}
         </ul>
       </section>

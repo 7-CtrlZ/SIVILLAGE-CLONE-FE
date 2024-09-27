@@ -1,10 +1,12 @@
+import ProductDetailInfo from '@/components/pages/product/ProductDetailInfo';
+import ProductDetailSwiper from '@/components/pages/product/ProductDetailSwiper';
 import React from 'react';
 
 const page = ({ params }: { params: { productCode: string } }) => {
   return (
     <section>
-      <h1>{params['productCode']}</h1>
-      {`This page will be showed when the URL is /products/${params['productCode']}/page`}
+      <ProductDetailSwiper />
+      <ProductDetailInfo />
     </section>
   );
 };
