@@ -4,7 +4,7 @@ import React from 'react';
 
 const page = ({ params }: { params: { productCode: string } }) => {
   return (
-    <section>
+    <section className="font-pretendard">
       <ProductDetailSwiper />
       <ProductDetailInfo />
     </section>

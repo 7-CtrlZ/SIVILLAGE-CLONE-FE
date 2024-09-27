@@ -5,6 +5,7 @@ import SearchIcon from '../icons/SearchIcon';
 import ShoppingBagIcon from '../icons/ShoppingBagIcon';
 import TitleHeader from '../ui/TitleHeader';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import LinkNavUiWithIcon from '../ui/LinkNavUiWithIcon';
 
 export default function AuthServiceHeaderCsr() {
