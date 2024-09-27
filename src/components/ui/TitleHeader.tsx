@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 export default function TitleHeader({
-  title = "타이틀",
-  textStyle = "text-2xl font-bold",
+  title = '타이틀',
+  textStyle = 'text-2xl font-pretendard',
 }: {
   title: string;
   textStyle?: string;

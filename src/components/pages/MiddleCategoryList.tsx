@@ -16,7 +16,7 @@ async function MiddleCategoryList({
   if (!data) return <div>Loading...</div>;
   return (
     <div className="col-span-8 p-5">
-      <div className="w-full h-[100px] object-cover overflow-hidden mb-4">
+      <div className="w-full h-[100px] object-cover overflow-hidden">
         <Image
           src="https://image.sivillage.com/upload/C00001/s3/dspl/banner/90/809/00/240900000511809_20240920201628.jpg"
           alt="categoryBanner"
@@ -28,7 +28,7 @@ async function MiddleCategoryList({
         <ul>
           {data.map((category: MiddleCategoryType) => (
             <Link
-              className="text-sm flex justify-between items-center"
+              className="text-sm flex justify-between items-center text-semibold font-pretendard"
               key={category.middleCategoryName}
               href={`/productlist?topCategoryName=${categoryName}&middleCategoryName=${category.middleCategoryName}`}
             >

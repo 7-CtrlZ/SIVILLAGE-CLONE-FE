@@ -11,7 +11,7 @@ function TopCategoryList({
 }) {
   // console.log("카테고리 데이터: ", data);
   return (
-    <nav className="h-screen">
+    <nav className="h-screen border-r border-r-[1px] border-gray-100">
       <ul>
         {data.map((category: TopCategoryType) => (
           <Link
@@ -21,9 +21,9 @@ function TopCategoryList({
             <li
               className={`${
                 categoryName === category.topCategoryName
-                  ? 'bg-black text-white transition-all'
+                  ? 'bg-black text-white transition-all font-bold'
                   : 'bg-white transition-all'
-              } text-left py-2 px-4 text-sm text-[#a0a0a0] font-pretendard`}
+              } text-left py-3.5 pl-8 pr-4 text-sm text-[#a0a0a0] font-pretendard`}
             >
               {category.topCategoryName}
             </li>

@@ -1,46 +1,44 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { TabNavType } from "@/types/bottomTabTypes";
-import CategoryIcon from "@/components/icons/CategoryIcon";
-import BrandIcon from "@/components/icons/BrandIcon";
-import HomeIcon from "@/components/icons/HomeIcon";
-import MyPageIcon from "@/components/icons/MyPageIcon";
-import RecentIcon from "@/components/icons/RecentIcon";
-import { TopCategoryType } from "@/types/ResponseTypes";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { TabNavType } from '@/types/bottomTabTypes';
+import CategoryIcon from '@/components/icons/CategoryIcon';
+import BrandIcon from '@/components/icons/BrandIcon';
+import HomeVIcon from '@/components/icons/HomeVIcon';
+import MyPageIcon from '@/components/icons/MyPageIcon';
+import RecentIcon from '@/components/icons/RecentIcon';
+import { TextUi } from '@/components/ui/TextUi';
 
 export const defaultTabNav: TabNavType[] = [
   {
     id: 1,
-    title: "카테고리",
+    title: 'Category',
     icon: CategoryIcon,
-    url: "/categories", // 나중에 동적으로 변경될 예정
+    url: '/categories', // 나중에 동적으로 변경될 예정
   },
   {
     id: 2,
-    title: "브랜드",
+    title: 'BRAND',
     icon: BrandIcon,
-    url: "/brand",
+    url: '/brand',
   },
   {
     id: 3,
-    title: "홈",
-    icon: HomeIcon,
-    url: "/",
+    icon: HomeVIcon,
+    url: '/',
   },
   {
     id: 4,
-    title: "마이페이지",
+    title: 'MY',
     icon: MyPageIcon,
-    url: "/mypage",
+    url: '/mypage',
   },
   {
     id: 5,
-    title: "최근 본 상품",
+    title: 'Recent',
     icon: RecentIcon,
-    url: "/recent",
+    url: '/recent',
   },
 ];
 
@@ -48,20 +46,26 @@ function BottomTab() {
   const [tabNav, setTabNav] = useState<TabNavType[]>(defaultTabNav);
 
   return (
-    <div className="fixed bottom-0 w-full bg-white border-t border-gray-200">
-      <ul className="flex justify-around py-2">
+    <nav className="px-6 bg-white tab-menu-wrap">
+      <ul className="flex justify-between items-center py-1.5">
         {tabNav.map((tab) => {
           const IconComponent = tab.icon;
           return (
-            <li key={tab.id} className="flex flex-col items-center">
-              <Link href={tab.url} className="flex flex-col items-center">
+            <li
+              key={tab.id}
+              className="flex flex-col items-center justify-center"
+            >
+              <Link href={tab.url} className="flex flex-col items-center gap-1">
                 <IconComponent />
+                <TextUi variant={'lightGray'} size={'xxs'} asChild>
+                  {tab.title}
+                </TextUi>
               </Link>
             </li>
           );
         })}
       </ul>
-    </div>
+    </nav>
   );
 }
 

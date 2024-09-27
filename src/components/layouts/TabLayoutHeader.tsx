@@ -6,7 +6,7 @@ function TabLayoutHeader() {
   return (
     <header className="py-3 px-4">
       <ul>
-        <LinkNavUiWithIcon isHistoryBack={true} icon={<ArrowLeftIcon />} />
+        <LinkNavUiWithIcon href="/" icon={<ArrowLeftIcon />} />
       </ul>
     </header>
   );

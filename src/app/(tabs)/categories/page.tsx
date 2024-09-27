@@ -17,7 +17,7 @@ const page = async ({
   const topCategoryData: TopCategoryType[] = await getTopCategories();
 
   if (!searchParams.topCategoryName && topCategoryData.length > 0) {
-    searchParams.topCategoryName = topCategoryData[0].topCategoryName;
+    searchParams.topCategoryName = topCategoryData[1].topCategoryName;
   } else if (topCategoryData.length === 0) {
     return <div>Loading...</div>;
   }
