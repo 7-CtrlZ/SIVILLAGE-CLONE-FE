@@ -7,7 +7,7 @@ import { TextUi } from '@/components/ui/TextUi';
 import { ProductDetail } from '@/types/ResponseTypes';
 import ColorChips from '../ui/colorChips';
 import { Star } from 'lucide-react';
-import LikeHeart from '../ui/likeHeart';
+import LikeHeart from '../ui/LikeHeart';
 
 function ProductListCard({ productData }: { productData: ProductDetail }) {
   const [selectedImage, setSelectedImage] = useState<string>();
@@ -21,7 +21,9 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
       ); // mainOptionId로 API 호출
       const data = await response.json();
       // console.log('이미지 요청 성공:', data);
-      const mainImage = data.data.find((img: any) => img.isMainImage)?.imageUrl;
+      const mainImage = data.result.find(
+        (img: any) => img.isMainImage
+      )?.imageUrl;
       if (mainImage) {
         setSelectedImage(mainImage);
         console.log('이미지 요청 성공:', mainImage);

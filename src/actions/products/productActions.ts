@@ -57,11 +57,11 @@ export async function getCategoryProducts(
   console.log('받아온 상품 id 목록 데이터', products);
 
   return {
-    content: products.data.content,
-    nextCursor: products.data.nextCursor,
-    hasNext: products.data.hasNext,
-    size: products.data.size,
-    page: products.data.page,
+    content: products.result.content,
+    nextCursor: products.result.nextCursor,
+    hasNext: products.result.hasNext,
+    size: products.result.size,
+    page: products.result.page,
   };
 }
 
@@ -85,7 +85,7 @@ export async function getProductDetailByProductCode(productCode: string) {
   const product = await response.json();
   // console.log('받아온 상품 상세 데이터', product);
 
-  return product.data;
+  return product.result;
 }
 
 // export const getProductListByCategory = async (
