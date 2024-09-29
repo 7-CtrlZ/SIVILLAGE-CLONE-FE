@@ -17,6 +17,7 @@ const textVariants = cva('text-base leading-6 text-black', {
       xxs: 'text-[0.625rem]',
       xs: 'text-xs',
       sm: 'text-sm',
+      base: 'text-base',
       md: 'text-md',
       lg: 'text-lg',
       xl: 'text-xl',
