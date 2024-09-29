@@ -66,7 +66,7 @@ export async function getCategoryProducts(
 }
 
 export async function getProductDetailByProductCode(productCode: string) {
-  // console.log('productCode', productCode);
+  console.log('productCode', productCode);
   const response = await fetch(
     `${process.env.SERVER_URL}/api/v1/product/${productCode}`,
     {

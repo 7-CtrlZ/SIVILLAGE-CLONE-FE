@@ -37,11 +37,15 @@ const page = async ({
       : null
   );
 
-  const productDetails = await Promise.all(
-    getProducts.content.map((product) =>
+  const productDetails = await Promise.allSettled(
+    getProducts.content.map((product: productcodelist) =>
       getProductDetailByProductCode(product.productCode)
     )
   );
+
+  const successfulProductDetails = productDetails
+    .filter((result) => result.status === 'fulfilled') // 성공한 것만 필터링
+    .map((result) => (result as PromiseFulfilledResult<any>).value); // 성공한 결과에서 값만 추출
 
   console.log('액션 통해서 받아온 상품 상세 데이터', productDetails);
 
@@ -49,7 +53,7 @@ const page = async ({
     <main className="mb-[50px]">
       <section className="px-6 py-10">
         <ul className="grid grid-cols-2 justify-between gap-4">
-          {productDetails.map((productData, index) => (
+          {successfulProductDetails.map((productData, index) => (
             <Suspense key={index} fallback={<ProductListCardSkeleton />}>
               <ProductListCard productData={productData} />
             </Suspense>
