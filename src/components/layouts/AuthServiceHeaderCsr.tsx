@@ -6,6 +6,7 @@ import ShoppingBagIcon from '../icons/ShoppingBagIcon';
 import TitleHeader from '../ui/TitleHeader';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import LinkNavUiWithIcon from '../ui/LinkNavUiWithIcon';
 
 export default function AuthServiceHeaderCsr() {
   const pathName = usePathname();
@@ -24,10 +25,13 @@ export default function AuthServiceHeaderCsr() {
       <nav>
         <ul className="flex justify-between">
           <li>
-            <ArrowLeftIcon />
+            <LinkNavUiWithIcon isHistoryBack={true} icon={<ArrowLeftIcon />} />
           </li>
           <li className=" absolute left-[50%] translate-x-[-50%]">
-            <TitleHeader title={title} textStyle="text-xl" />
+            <TitleHeader
+              title={title}
+              textStyle="text-xl font-pretendard font-medium mt-1"
+            />
           </li>
           <li>
             <ul className="flex gap-4">

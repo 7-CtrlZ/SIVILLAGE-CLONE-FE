@@ -2,8 +2,10 @@
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 function LogInForm() {
+  const router = useRouter();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('e.currentTarget: ', e.currentTarget);
@@ -21,27 +23,42 @@ function LogInForm() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center w-[80%] gap-2 mx-auto"
+        className="flex flex-col items-center justify-center w-[90%] gap-2 mx-auto font-pretendard"
       >
-        <Input type="email" required name="email" placeholder="Email" />
+        <Input
+          type="email"
+          required
+          name="email"
+          placeholder="아이디 (이메일주소)"
+        />
         <Input
           type="password"
           required
           name="password"
-          placeholder="Password"
+          placeholder="비밀번호"
         />
 
-        <Button type="submit" className="w-full">
+        <Button
+          type="submit"
+          className="w-full mt-[2.5rem] h-[3rem] font-pretendard font-semibold"
+        >
           로그인
         </Button>
-
         <Button
+          type="button"
+          className="mt-[0.8rem] w-full h-[3rem] font-pretendard font-semibold bg-white text-black border border-gray-300"
+          onClick={() => router.push('/sign-up')}
+        >
+          회원가입
+        </Button>
+
+        {/* <Button
           type="button"
           className="w-full bg-yellow-600"
           onClick={() => signIn('kakao')}
         >
           카카오 로그인
-        </Button>
+        </Button> */}
       </form>
     </>
   );

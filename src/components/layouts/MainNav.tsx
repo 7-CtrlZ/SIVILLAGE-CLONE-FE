@@ -1,6 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import { navItems } from "../../datas/navItems";
+import React from 'react';
+import Link from 'next/link';
+import { navItems } from '../../datas/navItems';
 
 const MainNav = () => {
   return (
@@ -9,7 +9,9 @@ const MainNav = () => {
         {navItems.map((item) => (
           <li key={item.id}>
             <Link href={item.url}>
-              <span>{item.title}</span>
+              <span className="font-pretendard text-base font-medium">
+                {item.title}
+              </span>
             </Link>
           </li>
         ))}

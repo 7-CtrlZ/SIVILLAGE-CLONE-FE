@@ -18,7 +18,7 @@ export default function NotiCountView({ count }: { count: number }) {
       transition={{ duration: 0.2, ease: 'easeInOut' }}
       className="absolute top-[-3px] right-[-8px] size-[20px] rounded-full bg-[#D99C63] flex items-center justify-center"
     >
-      <TextUi className="text-white text-[0.55rem] font-normal leading-none">
+      <TextUi className="text-white text-[0.65rem] font-pretendard leading-none">
         {count}
       </TextUi>
     </motion.div>

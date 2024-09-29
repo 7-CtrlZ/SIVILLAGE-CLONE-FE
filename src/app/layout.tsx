@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
-import BottomTab from '@/components/layouts/BottomTab';
 import AuthContextProvider from '@/provider/AuthContextProvider';
 import { getServerSession } from 'next-auth';
 import { options } from './api/auth/[...nextauth]/options';
-import ScrollToTopButton from '@/components/icons/ScrollToTopButton';
+import ScrollToTopButton from '@/components/utils/ScrollToTopButton';
+import Footer from '@/components/layouts/footer/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,7 +35,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <AuthContextProvider isAuth={isAuth}>
           {children}
-          <BottomTab />
+          <Footer />
           <ScrollToTopButton />
         </AuthContextProvider>
       </body>

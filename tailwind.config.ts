@@ -23,6 +23,9 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        sifontGray: '#a0a0a0',
+        sifontBrown: '#d99c63',
+        siBlack: '#121822',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

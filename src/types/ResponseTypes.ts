@@ -37,7 +37,7 @@ export interface ReviewDataType {
 export interface CommonResType<T> {
   status: string;
   message: string;
-  data: T;
+  result: T;
 }
 
 export interface UserData {
