@@ -7,6 +7,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <ProductListHeader />
       {children}
+      <BottomTab />
     </>
   );
 };

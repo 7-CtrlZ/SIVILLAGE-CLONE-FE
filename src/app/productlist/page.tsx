@@ -4,7 +4,6 @@ import { getCategoryProducts } from '@/actions/products/productActions';
 import ProductListCardSkeleton from '@/components/skeletons/ProductListCardSkeleton';
 import CategoryDepth from '@/components/layouts/productListCategory/categoryDepth';
 import CategoryHorizontalList from '@/components/layouts/productListCategory/categoryHorizontalList';
-import { HrUi } from '@/components/ui/HrUi';
 import AllProduct from '@/components/icons/AllProduct';
 import ProductListCard from '@/components/pages/product/ProductListCard';
 import { getBottomCategories } from '@/actions/initial/categoryActions';
@@ -50,13 +49,15 @@ const page = async ({
       <CategoryDepth />
       <CategoryHorizontalList />
       <AllProduct />
-      <ul className="grid grid-cols-2 justify-between items-start gap-4 px-6">
-        {productCodeDataByCategory.content.map((productCode, index) => (
-          <Suspense key={index} fallback={<ProductListCardSkeleton />}>
-            <ProductListCard productCode={productCode.productCode} />
-          </Suspense>
-        ))}
-      </ul>
+      <section className="pb-10">
+        <ul className="grid grid-cols-2 justify-between items-start gap-4 px-6">
+          {productCodeDataByCategory.content.map((productCode, index) => (
+            <Suspense key={index} fallback={<ProductListCardSkeleton />}>
+              <ProductListCard productCode={productCode.productCode} />
+            </Suspense>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 };

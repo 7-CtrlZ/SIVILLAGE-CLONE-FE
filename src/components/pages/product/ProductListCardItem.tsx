@@ -20,7 +20,7 @@ function ProductListCardItem({
     },
     {
       color: '화이트',
-      code: '#FFFFFF',
+      code: '#cbcbcb',
     },
     {
       color: '블루',
