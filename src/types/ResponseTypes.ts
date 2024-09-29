@@ -33,10 +33,11 @@ export interface ReviewDataType {
   }[];
 }
 
-// 제네릭을 사용하는 CommonResType 정의
 export interface CommonResType<T> {
-  status: string;
+  httpStatus: string;
+  isSuccess: boolean;
   message: string;
+  code: number;
   result: T;
 }
 
@@ -82,11 +83,16 @@ export interface ProductDetail {
   productDescription: string;
   productDetailContent: string;
   price: number;
-  mainOptionList: { mainOptionId: number; mainOptionName: string }[];
+  mainOptionList: mainOptionListType[];
   // isliked: boolean;
 }
 
-export interface ProductImages {
+export interface mainOptionListType {
+  mainOptionId: number;
+  mainOptionName: string;
+}
+
+export interface ProductOptionImage {
   mainOptionId: number;
   imageUrl: string;
   imageDescription: string;
