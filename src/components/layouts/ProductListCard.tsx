@@ -7,7 +7,7 @@ import { TextUi } from '@/components/ui/TextUi';
 import { ProductDetail } from '@/types/ResponseTypes';
 import ColorChips from '../ui/colorChips';
 import { Star } from 'lucide-react';
-import LikeHeart from '../ui/LikeHeart';
+import LikeHeart from '@/components/ui/LikeHeart';
 
 function ProductListCard({ productData }: { productData: ProductDetail }) {
   const [selectedImage, setSelectedImage] = useState<string>();
