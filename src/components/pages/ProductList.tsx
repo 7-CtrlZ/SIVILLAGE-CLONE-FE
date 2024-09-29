@@ -1,5 +1,5 @@
-import React from "react";
-import ProductListCard from "../layouts/ProductListCard";
+import React from 'react';
+import ProductListCard from './product/ProductListCard';
 // import { getProductListByCategory } from "@/api/product"; // API 연결
 
 const ProductList = ({
@@ -12,7 +12,7 @@ const ProductList = ({
     subCategoryName?: string | null;
   };
 }) => {
-  console.log("searchParams", searchParams);
+  console.log('searchParams', searchParams);
   // const getProductList = await getProductListByCategory(
   //   searchParams.topCategoryName,
   //   searchParams.middleCategoryName,
@@ -20,10 +20,10 @@ const ProductList = ({
   // );
 
   const getProductList = [
-    { productCode: "a4d9f2e2" },
-    { productCode: "a4d9f2e3" },
-    { productCode: "a4d9f2e4" },
-    { productCode: "a4d9f2e5" },
+    { productCode: 'a4d9f2e2' },
+    { productCode: 'a4d9f2e3' },
+    { productCode: 'a4d9f2e4' },
+    { productCode: 'a4d9f2e5' },
   ];
 
   return (

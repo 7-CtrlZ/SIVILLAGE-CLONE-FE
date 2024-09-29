@@ -7,7 +7,7 @@ import LinkNavUiWithIcon from '@/components/ui/LinkNavUiWithIcon';
 
 function ProductListHeader() {
   return (
-    <header className="fixed top-0 left-0 w-full">
+    <header className="fixed top-0 left-0 w-full bg-white z-[100]">
       <nav className="p-4 pb-3 flex justify-between items-start">
         <ul className="flex justify-start items-center gap-4">
           <LinkNavUiWithIcon

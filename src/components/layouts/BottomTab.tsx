@@ -45,6 +45,22 @@ export const defaultTabNav: TabNavType[] = [
 function BottomTab() {
   const [tabNav, setTabNav] = useState<TabNavType[]>(defaultTabNav);
 
+  const [isView, setIsView] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 100) {
+        setIsView(true);
+      } else {
+        setIsView(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (!isView) return null;
+
   return (
     <nav className="px-6 bg-white tab-menu-wrap">
       <ul className="flex justify-between items-center py-1.5">
