@@ -5,7 +5,7 @@ import ProductOptionTab from '@/components/pages/product/ProductOptionTab';
 function layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <GoodsHeader />
+      {/* <GoodsHeader /> */}
       {children}
       <ProductOptionTab />
     </>

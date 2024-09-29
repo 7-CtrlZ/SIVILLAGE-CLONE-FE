@@ -7,7 +7,7 @@ import LinkNavUiWithIcon from '@/components/ui/LinkNavUiWithIcon';
 
 function GoodsHeader() {
   return (
-    <header className="goods-header fixed top-0 left-0 w-full">
+    <header className="goods-header fixed top-0 left-0 w-full z-[100]">
       <nav className="p-4 flex justify-between items-start">
         <ul className="flex justify-start items-center gap-4">
           <LinkNavUiWithIcon
