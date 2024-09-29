@@ -58,7 +58,7 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
         <Link href={`/product/${productData.productCode}`} scroll>
           <div className="w-full h-auto bg-gray-100 object-cover overflow-hidden">
             <Image
-              className="object-cover bg-transparent"
+              className="object-cover w-full h-auto bg-transparent"
               src={
                 selectedImage ??
                 'https://image.sivillage.com/upload/C00001/goods/org/049/230714005716049.jpg'
@@ -86,7 +86,7 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
             {productData.price.toLocaleString()}
           </span>
         </TextUi>
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <Star fill="black" size={16} />
           <TextUi size={'xs'} className="py-1 pl-1 pr-0.5">
             5
@@ -94,7 +94,7 @@ function ProductListCard({ productData }: { productData: ProductDetail }) {
           <TextUi size={'xs'} variant={'lightGray'} className="py-1">
             (25)
           </TextUi>
-        </div>
+        </div> */}
         <div className="flex">
           {productData.mainOptionList.map(
             (option) => (

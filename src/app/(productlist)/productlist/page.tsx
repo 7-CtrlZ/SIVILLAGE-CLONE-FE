@@ -9,6 +9,10 @@ import { CategoryLevel } from '@/types/productTypes';
 import { productcodelist } from '@/types/ResponseTypes';
 import ProductListCard from '@/components/layouts/ProductListCard';
 import ProductListCardSkeleton from '@/components/skeletons/ProductListCardSkeleton';
+import CategoryDepth from '@/components/layouts/productListCategory/categoryDepth';
+import CategoryHorizontalList from '@/components/layouts/productListCategory/categoryHorizontalList';
+import { HrUi } from '@/components/ui/HrUi';
+import AllProduct from '@/components/icons/AllProduct';
 
 const page = async ({
   searchParams,
@@ -50,17 +54,20 @@ const page = async ({
   console.log('액션 통해서 받아온 상품 상세 데이터', productDetails);
 
   return (
-    <main className="mb-[50px]">
-      <section className="px-6 py-10">
-        <ul className="grid grid-cols-2 justify-between gap-4">
-          {successfulProductDetails.map((productData, index) => (
-            <Suspense key={index} fallback={<ProductListCardSkeleton />}>
-              <ProductListCard productData={productData} />
-            </Suspense>
-          ))}
-        </ul>
-      </section>
-    </main>
+    <section>
+      <CategoryDepth />
+      <HrUi className="m-0" />
+      <CategoryHorizontalList />
+      <HrUi className="m-0" />
+      <AllProduct />
+      <ul className="grid grid-cols-2 justify-between gap-4 px-6">
+        {successfulProductDetails.map((productData, index) => (
+          <Suspense key={index} fallback={<ProductListCardSkeleton />}>
+            <ProductListCard productData={productData} />
+          </Suspense>
+        ))}
+      </ul>
+    </section>
   );
 };
 
