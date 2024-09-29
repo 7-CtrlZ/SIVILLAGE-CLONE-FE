@@ -5,7 +5,7 @@ import {
   getProductOptionsByMainOptionId,
 } from '@/actions/products/productActions';
 import LikeHeart from '../../ui/likeHeart';
-import ProductListCardItem from './\bProductListCardItem';
+import ProductListCardItem from './ProductListCardItem';
 
 async function ProductListCard({ productCode }: { productCode: string }) {
   const productData = await getProductDetailByProductCode(productCode);
@@ -14,8 +14,6 @@ async function ProductListCard({ productCode }: { productCode: string }) {
       getProductOptionsByMainOptionId(option.mainOptionId)
     )
   );
-
-  console.log('productData', productData);
 
   return (
     <li className="relative flex flex-col">
